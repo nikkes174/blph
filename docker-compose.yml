@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    container_name: finalsite_app
+    env_file:
+      - .env
+    expose:
+      - "8041"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: finalsite_nginx
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped

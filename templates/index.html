@@ -1,0 +1,1175 @@
+﻿<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="[NOM] вЂ” RГ©alisateur, Directeur Photo &amp; Monteur basГ© Г  [VILLE]. Portfolio de films, clips et contenus crГ©atifs.">
+    <meta property="og:title" content="[NOM] вЂ” Director вЂў DP вЂў Editor">
+    <meta property="og:description" content="Portfolio vidГ©o вЂ” RГ©alisation, cadre, montage et Г©talonnage.">
+    <meta property="og:type" content="website">
+    <title>Black Phantom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@400;500&amp;display=swap"
+          rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .video-bg {
+            object-fit: cover;
+        }
+
+        .grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-overlay {
+            display: none !important;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.03);
+        }
+
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal:not(.active) {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .cta-discuss {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 2rem;
+            background: transparent;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .cta-discuss:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.8), 0 0 0 4px rgba(10, 15, 25, 1);
+        }
+
+        .cta-line-v {
+            pointer-events: none;
+            position: absolute;
+            top: -40px;
+            bottom: -40px;
+            width: 2px;
+            z-index: 0;
+            background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2) 40px, rgba(255, 255, 255, 0.667) 40px, rgb(255, 255, 255), rgba(255, 255, 255, 0.667) calc(100% - 40px), rgba(255, 255, 255, 0.2) calc(100% - 40px), rgba(255, 255, 255, 0));
+        }
+
+        .cta-line-h {
+            pointer-events: none;
+            position: absolute;
+            left: -40px;
+            right: -40px;
+            height: 2px;
+            z-index: 0;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2) 40px, rgba(255, 255, 255, 0.667) 40px, rgb(255, 255, 255), rgba(255, 255, 255, 0.667) calc(100% - 40px), rgba(255, 255, 255, 0.2) calc(100% - 40px), rgba(255, 255, 255, 0));
+        }
+
+        .cta-blur {
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            filter: blur(10px);
+            opacity: 0;
+            z-index: -2;
+            transition: opacity 0.3s, filter 0.3s;
+        }
+
+        .cta-line-v::before,
+        .cta-line-h::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: inherit;
+            filter: blur(4px);
+            z-index: -2;
+        }
+
+        .cta-overlay {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            z-index: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 20%, rgba(17, 17, 17, 0.667) 50%) 0% 0% / 3px 3px, radial-gradient(100% 100%, rgb(255, 255, 255), rgba(255, 255, 255, 0)) 0% 0% / auto;
+            transition: opacity 0.3s;
+        }
+
+        .cta-radial-glow {
+            position: absolute;
+            inset: -20px;
+            opacity: 0;
+            z-index: -1;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent 60%);
+            filter: blur(20px);
+            transition: opacity 0.3s;
+        }
+
+        .cta-discuss:hover .cta-overlay {
+            opacity: 0.3;
+        }
+
+        .cta-discuss:hover .cta-blur {
+            opacity: 1;
+            filter: blur(14px);
+        }
+
+        .cta-discuss:hover .cta-radial-glow {
+            opacity: 1;
+        }
+
+        .stack-section {
+            background: #0A0A0A;
+            color: #E3E1DC;
+            position: relative;
+        }
+
+        .blur-word {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(-18px);
+            animation: blurWordIn 700ms cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+        }
+
+        @keyframes blurWordIn {
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        .card-item {
+            position: sticky;
+            top: 10vh;
+            height: 80vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-inner {
+            width: 90%;
+            height: 100%;
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            border-radius: 4px;
+            transform-origin: center top;
+            will-change: transform, filter;
+        }
+
+        .preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        .preloader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        @media (max-width: 1024px) {
+            .card-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .card-item {
+                top: 8vh;
+                height: 85vh;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 antialiased">
+
+<div id="pagePreloader" class="preloader">
+    <div class="flex flex-col items-center gap-4">
+        <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo" class="w-20 h-20 object-contain">
+        <span class="text-sm tracking-[0.25em] text-white/80">BLACK PHANTOM</span>
+    </div>
+</div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 py-5 lg:px-12">
+    <div class="flex items-center justify-between max-w-screen-2xl mx-auto">
+        <a href="#home"
+           class="inline-flex items-center gap-2 text-sm font-medium tracking-tighter text-white hover:text-neutral-300 transition-colors">
+            <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo" class="w-6 h-6 object-contain">
+            <span>BLACK PHANTOM</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#about" class="text-xs font-light text-neutral-400 hover:text-white transition-colors">Услуги</a>
+            <a href="#work" class="text-xs font-light text-neutral-400 hover:text-white transition-colors">Кейсы</a>
+            <a href="#contact"
+               class="text-xs font-light text-neutral-400 hover:text-white transition-colors">Контакты</a>
+            <a href="tel:+79935100807" class="cta-discuss">
+                <div class="cta-line-v" style="left:-2px;">
+                    <div class="cta-blur"></div>
+                </div>
+                <div class="cta-line-v" style="right:-2px;">
+                    <div class="cta-blur"></div>
+                </div>
+                <div class="cta-line-h" style="top:-2px;">
+                    <div class="cta-blur"></div>
+                </div>
+                <div class="cta-line-h" style="bottom:-2px;">
+                    <div class="cta-blur"></div>
+                </div>
+                <div class="cta-overlay"></div>
+                <div class="cta-radial-glow"></div>
+                <span class="relative z-10">Обсудить проект</span>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuBtn" class="md:hidden text-white">
+            <iconify-icon icon="solar:hamburger-menu-linear" width="24" height="24"
+                          style="stroke-width: 1.5;"></iconify-icon>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 z-40 bg-neutral-950/98 flex flex-col items-center justify-center gap-8 modal">
+    <a href="#about" class="text-2xl font-light text-neutral-100 hover:text-white transition-colors"
+       onclick="closeMobileMenu()">Услуги</a>
+    <a href="#work" class="text-2xl font-light text-neutral-100 hover:text-white transition-colors"
+       onclick="closeMobileMenu()">Кейсы</a>
+    <a href="#contact" class="text-2xl font-light text-neutral-100 hover:text-white transition-colors"
+       onclick="closeMobileMenu()">Контакты</a>
+    <a href="tel:+79935100807" class="text-2xl font-light text-neutral-100 hover:text-white transition-colors"
+       onclick="closeMobileMenu()">Обсудить проект</a>
+    <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white">
+        <iconify-icon icon="solar:close-circle-linear" width="28" height="28" style="stroke-width: 1.5;"></iconify-icon>
+    </button>
+</div>
+
+<!-- Hero Section -->
+<section id="home" class="relative h-screen w-full overflow-hidden">
+    <!-- Video Background -->
+    <video id="heroVideo" class="absolute inset-0 w-full h-full video-bg" autoplay="" loop="" muted="" playsinline=""
+           poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1920&amp;q=80">
+        <source id="heroVideoSource"
+                src="{{ url_for('static', path='files/ph.mp4') }}"
+                data-desktop-src="{{ url_for('static', path='files/ph.mp4') }}"
+                data-mobile-src="{{ url_for('static', path='files/IMG_7041.MP4') }}"
+                type="video/mp4">
+    </video>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/40"></div>
+    <div class="absolute inset-0 grain pointer-events-none"></div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-3">
+        <span class="text-xs font-light text-neutral-500 tracking-widest"
+              style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+        <div class="w-px h-16 bg-gradient-to-b from-neutral-500 to-transparent"></div>
+    </div>
+
+
+
+    <!-- Hero Content -->
+    <div class="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
+
+
+    </div>
+
+    <!-- Bottom Info -->
+    <div class="absolute bottom-6 left-6 right-6 lg:left-12 lg:right-12 flex justify-between items-end z-10">
+        <div class="flex gap-6 text-xs text-neutral-500 font-light">
+            <span>[Digital] solutions without borders</span>
+        </div>
+        <span class="text-xs text-neutral-600">© 2025</span>
+    </div>
+</section>
+
+<!-- Video Modal -->
+<div id="videoModal" class="fixed inset-0 z-50 bg-neutral-950/95 flex items-center justify-center p-6 modal">
+    <button onclick="closeVideoModal()"
+            class="absolute top-6 right-6 text-white hover:text-neutral-300 transition-colors">
+        <iconify-icon icon="solar:close-circle-linear" width="32" height="32" style="stroke-width: 1.5;"></iconify-icon>
+    </button>
+    <div class="w-full max-w-5xl aspect-video bg-neutral-900">
+        <iframe id="videoIframe" class="w-full h-full" src="" frameborder="0" allow="autoplay; fullscreen"
+                allowfullscreen=""></iframe>
+    </div>
+</div>
+
+<!-- Identity Section -->
+<section
+        class="min-h-screen flex pt-32 pr-6 pb-32 pl-6 items-center justify-center relative overflow-hidden bg-neutral-950">
+    <div data-us-project="NaoyTHRiquOhW7PvwNgE" class="absolute inset-0 z-0"></div>
+    <div class="absolute inset-0 bg-neutral-950/65 z-10"></div>
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-neutral-950 via-neutral-950/85 to-transparent z-20"></div>
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-transparent z-20"></div>
+    <div class="text-center max-w-4xl mx-auto relative z-30">
+        <p id="identityBlurText" class="font-display text-4xl md:text-6xl tracking-tighter leading-tight">
+            Цифровые продукты для бизнеса IT-разработка без компромиссов
+        </p>
+
+        <div class="mt-16 flex justify-center">
+            <div class="line-reveal h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
+        </div>
+    </div>
+    <script type="text/javascript">!function () {
+        var u = window.UnicornStudio;
+        if (u && u.init) {
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", function () {
+                    u.init()
+                })
+            } else {
+                u.init()
+            }
+        } else {
+            window.UnicornStudio = {isInitialized: !1};
+            var i = document.createElement("script");
+            i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.3/dist/unicornStudio.umd.js", i.onload = function () {
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", function () {
+                        UnicornStudio.init()
+                    })
+                } else {
+                    UnicornStudio.init()
+                }
+            }, (document.head || document.body).appendChild(i)
+        }
+    }();</script>
+</section>
+<!-- SELECTED WORKS (STACK) -->
+<section id="about" class="stack-section py-24 md:py-32">
+    <div class="px-6 md:px-12 mb-20 flex justify-between items-end max-w-[1600px] mx-auto">
+        <div>
+            <span class="block text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">Экосистема решений</span>
+            <h2 class="font-display text-4xl md:text-6xl tracking-tighter">Направления работы</h2>
+        </div>
+
+    </div>
+
+    <div class="w-full max-w-[1600px] mx-auto pb-[10vh]">
+
+        <!-- Listing 01 -->
+        <div class="card-item group">
+            <div class="card-inner">
+                <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                    <div>
+                        <div class="font-display text-4xl text-white/10 mb-6">01</div>
+                        <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">
+                            Веб-разработка</h3>
+                        <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Создаём сайты и цифровые платформы, которые привлекают клиентов,
+                            автоматизируют процессы и усиливают бренд.</span>
+                    </div>
+
+                    <div class="max-w-xs">
+                        <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
+                            <li>UX/UI проектирование</li>
+                            <li>Frontend / Backend разработка</li>
+                            <li>Интеграция CRM и внутренних систем</li>
+                            <li>Подключение платёжных решений</li>
+                            <li>Автоматизация бизнес-процессов</li>
+                            <li>Оптимизация скорости и производительности</li>
+                            <li>Подготовка проекта к масштабированию</li>
+                            <li>Поддержка и развитие</li>
+                            <li>AI-персонализация контента и пользовательского опыта</li>
+                        </ul>
+
+
+                    </div>
+                </div>
+                <div class="relative h-full overflow-hidden order-first md:order-last">
+                    <img src="{{ url_for('static', path='files/dev1.png') }}"
+                         class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+                         alt="Office Tower">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Listing 02 -->
+        <div class="card-item group">
+            <div class="card-inner">
+                <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                    <div>
+                        <div class="font-display text-4xl text-white/10 mb-6">02</div>
+                        <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Мессенджеры и
+                            автоматизация</h3>
+                        <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Разрабатываем мессенджер-платформы и AI-ассистентов,
+                            которые выстраивают воронки, обрабатывают заявки и усиливают клиентский сервис.</span>
+                    </div>
+
+                    <div class="max-w-xs">
+                        <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
+                            <li>Разработка MAX/Telegram-ботов</li>
+                            <li>Разработка MAX/Telegram и VK Mini Apps</li>
+                            <li>Боты для VK</li>
+                            <li>Воронки продаж в мессенджерах</li>
+                            <li>Автоматическая обработка заявок</li>
+                            <li>Интеграция с CRM</li>
+                            <li>Чат-боты для онлайн-записи</li>
+                            <li>Прогрев аудитории и рассылки</li>
+                            <li>Личный кабинет внутри бота</li>
+                            <li>AI-ассистенты для продаж и поддержки клиентов</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative h-full overflow-hidden order-first md:order-last">
+                    <img src="{{ url_for('static', path='files/bot.png') }}"
+                         class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+                         alt="Luxury Interior">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listing 03 -->
+    <div class="card-item group">
+        <div class="card-inner">
+            <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                <div>
+                    <div class="font-display text-4xl text-white/10 mb-6">03</div>
+                    <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">
+                        Интернет-магазины</h3>
+                    <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Разрабатываем eCommerce-решения под ключ — от каталога и оплаты
+                            до автоматизации заказов и масштабирования продаж.</span>
+                </div>
+
+                <div class="max-w-xs">
+                    <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
+                        <li>Разработка интернет-магазинов под ключ</li>
+                        <li>Каталог с фильтрацией и интеллектуальным поиском</li>
+                        <li>Интеграция платёжных систем и онлайн-касс</li>
+                        <li>Подключение складских и учётных систем</li>
+                        <li>Автоматизация обработки заказов</li>
+                        <li>Личный кабинет покупателя</li>
+                        <li>Интеграция с маркетплейсами</li>
+                        <li>Аналитика и отчётность по продажам</li>
+                        <li>AI-рекомендации товаров и персонализация витрины</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="relative h-full overflow-hidden order-first md:order-last">
+                <img src="{{ url_for('static', path='files/shop.png') }}"
+                     class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+                     alt="Creative Office">
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listing 04 -->
+    <div class="card-item group">
+        <div class="card-inner">
+            <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                <div>
+                    <div class="font-display text-4xl text-white/10 mb-6">04</div>
+                    <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Разработка ПО</h3>
+                    <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Создаём кастомные IT-решения и SaaS-платформы для автоматизации,
+                            масштабирования и цифровой трансформации бизнеса.</span>
+                </div>
+
+                <div class="max-w-xs">
+    <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
+        <li>Разработка SaaS-платформ</li>
+        <li>Внутренние корпоративные системы</li>
+        <li>CRM и ERP-решения</li>
+        <li>Личные кабинеты и панели управления</li>
+        <li>Автоматизация внутренних процессов</li>
+        <li>API и системные интеграции</li>
+        <li>Высоконагруженные архитектуры</li>
+        <li>Поддержка и масштабирование</li>
+        <li>Интеграция AI-моделей и интеллектуальной аналитики</li>
+    </ul>
+</div>
+            </div>
+            <div class="relative h-full overflow-hidden order-first md:order-last">
+                <img src="{{ url_for('static', path='files/soft.png') }}"
+                     class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 grayscale hover:grayscale-0"
+                     alt="Etihad Towers">
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+<!-- Work Section -->
+<section id="work" class="min-h-screen bg-neutral-900 py-24 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-screen-2xl mx-auto">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12 lg:mb-16">
+            <div>
+                <p class="text-xs text-neutral-600 tracking-widest mb-3">Реализованные проекты</p>
+                <h2 class="font-display text-4xl lg:text-5xl font-normal text-white tracking-tight">Проекты,
+                    которые уже работают и приносят прибыль клиентам.</h2>
+            </div>
+
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            <!-- Project 1 -->
+            <article class="project-card group" data-category="commercial">
+                <div class="relative aspect-video overflow-hidden bg-neutral-900">
+                    <img src="{{ url_for('static', path='files/iss.png') }}"
+                         alt="Project 1"
+                         class="project-image w-full h-full object-cover transition-transform duration-700"
+                         loading="lazy">
+                    <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-white tracking-tight group-hover:text-neutral-300 transition-colors">
+                            Корпоративный сайт с системой личных
+                            кабинетов</h3>
+                        <p class="text-xs text-neutral-500 mt-1">Создали многофункциональную веб-платформу с разделением
+                            ролей и централизованным
+                            управлением, обеспечивающую автоматизацию бизнес-процессов и удобное взаимодействие с
+                            клиентами.</p>
+                    </div>
+                    <span class="text-xs text-neutral-600 font-light">01</span>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card group" data-category="music">
+                <div class="relative aspect-video overflow-hidden bg-neutral-900">
+                    <img src="{{ url_for('static', path='files/oil.png') }}"
+                         alt="Project 2"
+                         class="project-image w-full h-full object-cover transition-transform duration-700"
+                         loading="lazy">
+                    <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-white tracking-tight group-hover:text-neutral-300 transition-colors">
+                            Цифровая система бесперебойной отгрузки
+                            нефтепродуктов для АЗС</h3>
+                        <p class="text-xs text-neutral-500 mt-1">Разработана интеллектуальная система защиты
+                            инфраструктуры с использованием AI-алгоритмов
+                            (Isolation Forest, машинное обучение, предиктивная аналитика) для выявления аномалий и
+                            предотвращения киберугроз.
+
+                            Платформа обеспечивает автономную работу до 72 часов без подключения к корпоративной сети,
+                            мультиканальную зашифрованную связь и мониторинг в режиме реального времени с обнаружением
+                            угроз в течение секунд.
+
+                            Решение соответствует требованиям ФСТЭК, ФЗ-152 и отраслевым стандартам. Экономическая
+                            эффективность проекта — 358% ROI при окупаемости 8,5 месяцев.</p>
+                    </div>
+                    <span class="text-xs text-neutral-600 font-light">02</span>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card group" data-category="documentary">
+                <div class="relative aspect-video overflow-hidden bg-neutral-900">
+                    <img src="{{ url_for('static', path='files/sushi.png') }}"
+                         alt="Project 3"
+                         class="project-image w-full h-full object-cover transition-transform duration-700"
+                         loading="lazy">
+                    <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-white tracking-tight group-hover:text-neutral-300 transition-colors">
+                            AI-система прогнозирования и управления
+                            загрузкой персонала</h3>
+                        <p class="text-xs text-neutral-500 mt-1">Разработали AI-систему прогнозирования нагрузки и
+                            управления персоналом для службы доставки.
+                            Платформа анализирует объём заказов, сезонность и исторические данные, автоматически
+                            распределяет смены и оптимизирует численность сотрудников.
+
+                            Решение включает модуль контроля учёта персонала: фиксацию смен, расчёт фактически
+                            отработанного времени, анализ KPI и прозрачную систему начисления оплаты. Предиктивная
+                            аналитика позволяет заранее прогнозировать пиковые периоды и снижать операционные
+                            издержки.</p>
+                    </div>
+                    <span class="text-xs text-neutral-600 font-light">03</span>
+                </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card group" data-category="commercial">
+                <div class="relative aspect-video overflow-hidden bg-neutral-900">
+                    <img src="{{ url_for('static', path='files/om.png') }}"
+                         alt="Project 4"
+                         class="project-image w-full h-full object-cover transition-transform duration-700"
+                         loading="lazy">
+                    <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-white tracking-tight group-hover:text-neutral-300 transition-colors">
+                            Telegram-бот с AI для автоматизации
+                            B2B-продаж</h3>
+                        <p class="text-xs text-neutral-500 mt-1">Разработали AI-ассистента для автоматизации B2B-продаж
+                            в Telegram. Система берёт на себя
+                            первичную консультацию и прогрев клиента, квалифицирует лидов за счёт сбора задач, объёма и
+                            условий сотрудничества, презентует продуктовую линейку и ведёт диалог по структурированному
+                            скрипту продаж. При готовности к покупке бот передаёт «горячий» контакт менеджеру для
+                            финального
+                            этапа сделки.
+
+                            Решение поддерживает текстовые, голосовые и фото-сообщения в рамках единой воронки,
+                            автоматически собирает обратную связь, уведомляет администратора и сохраняет историю
+                            диалогов в
+                            базе данных для аналитики и контроля качества.</p>
+                    </div>
+                    <span class="text-xs text-neutral-600 font-light">04</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Project Modal -->
+<div id="projectModal" class="fixed inset-0 z-50 bg-neutral-950/98 overflow-y-auto modal">
+    <button onclick="closeProjectModal()"
+            class="fixed top-6 right-6 text-white hover:text-neutral-300 transition-colors z-10">
+        <iconify-icon icon="solar:close-circle-linear" width="32" height="32" style="stroke-width: 1.5;"></iconify-icon>
+    </button>
+    <div class="min-h-screen py-20 px-6 lg:px-12">
+        <div class="max-w-5xl mx-auto">
+            <div class="aspect-video bg-neutral-900 mb-8">
+                <iframe class="w-full h-full" src="https://player.vimeo.com/video/824804225" frameborder="0"
+                        allow="autoplay; fullscreen" allowfullscreen=""></iframe>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
+                <div class="lg:col-span-2">
+                    <h3 class="font-display text-3xl lg:text-4xl text-white tracking-tight mb-4">Brand Campaign вЂ”
+                        [CLIENT]</h3>
+                    <p class="text-neutral-400 font-light leading-relaxed">Film publicitaire rГ©alisГ© pour [CLIENT].
+                        Une approche cinГ©matographique pour mettre en valeur le produit Г  travers une narration
+                        visuelle forte et un travail de lumiГЁre soignГ©.</p>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-xs text-neutral-600 tracking-wider mb-2">RГ”LE</p>
+                        <p class="text-sm text-neutral-300">RГ©alisation, Cadre, Г‰talonnage</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-neutral-600 tracking-wider mb-2">ANNГ‰E</p>
+                        <p class="text-sm text-neutral-300">2024</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-neutral-600 tracking-wider mb-2">CRГ‰DITS</p>
+                        <p class="text-sm text-neutral-400 font-light">Production: [PROD]<br>DA: [NOM]<br>Musique:
+                            [COMPOSITEUR]</p>
+                    </div>
+                    <a href="#"
+                       class="inline-flex items-center gap-2 text-xs text-white hover:text-neutral-300 transition-colors">
+                        <iconify-icon icon="solar:link-round-linear" width="16" height="16"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                        Voir sur Vimeo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Services Section -->
+<section id="services" class="min-h-screen bg-neutral-950 py-24 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-screen-2xl mx-auto">
+        <div class="text-center mb-16 lg:mb-20">
+            <p class="text-xs text-neutral-600 tracking-widest mb-3">КОМПЕТЕНЦИИ</p>
+            <h2 class="font-display text-4xl lg:text-5xl font-normal text-white tracking-tight">Комплексные IT-решения</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+            <!-- Service 1 -->
+            <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
+
+                <h3 class="text-lg font-medium text-white tracking-tight mb-3">Надёжная защита данных</h3>
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Реализуем современные стандарты безопасности, защиту
+                    персональных данных и устойчивость к кибератакам.</p>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
+
+                <h3 class="text-lg font-medium text-white tracking-tight mb-3">AI-интеграции для бизнеса</h3>
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Внедряем искусственный интеллект в веб-сервисы: чат-боты,
+                    автоматизация процессов, персонализация контента и интеллектуальная аналитика.</p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
+
+                <h3 class="text-lg font-medium text-white tracking-tight mb-3">Интеграция с любыми сервисами</h3>
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Подключаем CRM, платёжные системы, маркетинговые
+                    инструменты и сторонние сервисы для создания единой цифровой экосистемы бизнеса.</p>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
+
+                <h3 class="text-lg font-medium text-white tracking-tight mb-3">Гарантийное сопровождение после релиза</h3>
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">В течение 30 дней после запуска обеспечиваем техническую
+                    поддержку, мониторинг и корректную работу всех функций системы..</p>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
+
+                <h3 class="text-lg font-medium text-white tracking-tight mb-3">Высокая скорость загрузки</h3>
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Оптимизируем код, архитектуру и серверную часть, чтобы сайт
+                    работал быстро и стабильно даже при высокой нагрузке.</p>
+            </div>
+
+            <!-- Service 6 - CTA -->
+            <div class="group p-8 bg-white hover:bg-neutral-100 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-medium text-neutral-950 tracking-tight mb-3">Готовы вывести бизнес на новый уровень?</h3>
+                    <p class="text-sm text-neutral-600 font-light leading-relaxed">Доверьте разработку профессионалам и получите цифровой продукт, который работает на ваш бизнес.</p>
+                </div>
+                <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium text-neutral-950 mt-6">
+                    Оставить
+                    заявку
+                    <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"
+                                  style="stroke-width: 1.5;"></iconify-icon>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="min-h-screen bg-neutral-900 py-24 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-screen-2xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+
+            <!-- Left -->
+            <div>
+                <p class="text-xs text-neutral-600 tracking-widest mb-3">КОНТАКТЫ</p>
+                <h2 class="font-display text-4xl lg:text-5xl font-normal text-white tracking-tight mb-8">Давайте создадим сильный цифровой продукт.</h2>
+
+                <p class="text-neutral-400 font-light leading-relaxed mb-10">
+                    Мы открыты к стратегическим проектам и долгосрочному сотрудничеству.
+Свяжитесь с нами, чтобы получить персональное предложение.
+                </p>
+
+
+
+                <!-- Social -->
+                <div class="flex gap-4">
+                    <a href="https://t.me/BlackPhantomManager" target="_blank"
+                       class="w-10 h-10 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800 flex items-center justify-center transition-all">
+                        <iconify-icon icon="fa6-brands:telegram" width="18" height="18" class="text-neutral-400"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </a>
+                    <a href="https://mail.yandex.ru/compose?to=BlackPhantom96@yandex.com" target="_blank"
+                       class="w-10 h-10 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800 flex items-center justify-center transition-all">
+                        <iconify-icon icon="solar:letter-linear" width="18" height="18" class="text-neutral-400"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </a>
+                    <a href="tel:+79935100807"
+                       class="w-10 h-10 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800 flex items-center justify-center transition-all">
+                        <iconify-icon icon="solar:phone-linear" width="18" height="18" class="text-neutral-400"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div>
+                <form id="leadForm" class="space-y-6">
+                    <input type="hidden" name="form_token" value="{{ form_token }}">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="first_name" class="block text-xs text-neutral-600 tracking-wider mb-2">ИМЯ</label>
+                            <input type="text" id="first_name" name="first_name" required=""
+                                   class="w-full bg-transparent border-b border-neutral-700 focus:border-white py-3 text-white outline-none transition-colors placeholder:text-neutral-600"
+                                   maxlength="60"
+                                   placeholder="Введите имя">
+                        </div>
+
+                    </div>
+                    <div>
+                        <label for="email" class="block text-xs text-neutral-600 tracking-wider mb-2">EMAIL</label>
+                        <input type="email" id="email" name="email" required=""
+                               class="w-full bg-transparent border-b border-neutral-700 focus:border-white py-3 text-white outline-none transition-colors placeholder:text-neutral-600"
+                               maxlength="120"
+                               placeholder="example@mail.com">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-xs text-neutral-600 tracking-wider mb-2">ТЕЛЕФОН</label>
+                        <input type="tel" id="phone" name="phone" required=""
+                               class="w-full bg-transparent border-b border-neutral-700 focus:border-white py-3 text-white outline-none transition-colors placeholder:text-neutral-600"
+                               maxlength="32"
+                               placeholder="+7 (999) 999-99-99">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-xs text-neutral-600 tracking-wider mb-2">ТЕКСТ СООБЩЕНИЯ</label>
+                        <textarea id="message" name="message" rows="4" required=""
+                                  class="w-full bg-transparent border-b border-neutral-700 focus:border-white py-3 text-white outline-none transition-colors placeholder:text-neutral-600 resize-none"
+                                  maxlength="4000"
+                                  placeholder="Опишите ваш запрос..."></textarea>
+                    </div>
+                    <label class="flex items-start gap-3 text-sm text-neutral-400 leading-relaxed">
+                        <input type="checkbox" name="consent" required="" class="mt-1 accent-white">
+                        <span>Я даю согласие на обработку <a href="/privacy" class="underline decoration-neutral-500 hover:decoration-white text-neutral-300 hover:text-white transition-colors">персональных данных</a>.</span>
+                    </label>
+                    <button type="submit"
+                            id="leadSubmitBtn"
+                            class="w-full py-4 bg-white text-neutral-950 text-sm font-medium tracking-wider hover:bg-neutral-200 transition-colors">
+                        ОТПРАВИТЬ
+                    </button>
+                    <p id="leadStatus" class="text-sm text-neutral-400 hidden"></p>
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-neutral-950 border-t border-neutral-900 py-8 px-6 lg:px-12">
+    <div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-6">
+            <span class="text-sm font-medium tracking-tighter text-white">[BLACK PHANTOM]</span>
+            <span class="text-xs text-neutral-600">© 2025 — Все права защищены</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs text-neutral-600">
+            <a href="/privacy" class="hover:text-white transition-colors">Политика конфиденциальности</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Global preloader
+    const pagePreloader = document.getElementById('pagePreloader');
+    const hidePreloader = () => {
+        if (pagePreloader) {
+            pagePreloader.classList.add('is-hidden');
+        }
+    };
+    const showPreloader = () => {
+        if (pagePreloader) {
+            pagePreloader.classList.remove('is-hidden');
+        }
+    };
+    window.addEventListener('load', () => {
+        setTimeout(hidePreloader, 220);
+    });
+    window.addEventListener('beforeunload', showPreloader);
+    document.querySelectorAll('a[href]').forEach((link) => {
+        link.addEventListener('click', () => {
+            const href = link.getAttribute('href') || '';
+            const isHash = href.startsWith('#');
+            const isExternal = link.target === '_blank';
+            const isSpecial = href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:');
+            if (!isHash && !isExternal && !isSpecial) {
+                showPreloader();
+            }
+        });
+    });
+
+    // Mobile/desktop hero video source switch
+    const heroVideo = document.getElementById('heroVideo');
+    const heroVideoSource = document.getElementById('heroVideoSource');
+    if (heroVideo && heroVideoSource) {
+        const desktopSrc = heroVideoSource.dataset.desktopSrc || heroVideoSource.getAttribute('src');
+        const mobileSrc = heroVideoSource.dataset.mobileSrc || desktopSrc;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const targetSrc = isMobile ? mobileSrc : desktopSrc;
+        if (heroVideoSource.getAttribute('src') !== targetSrc) {
+            heroVideoSource.setAttribute('src', targetSrc);
+            heroVideo.load();
+        }
+    }
+
+    // Mobile Menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Showreel Modal
+    const playShowreelBtn = document.getElementById('playShowreelBtn');
+    const videoModal = document.getElementById('videoModal');
+    const videoIframe = document.getElementById('videoIframe');
+
+    if (playShowreelBtn && videoModal && videoIframe) {
+        playShowreelBtn.addEventListener('click', () => {
+            videoIframe.src = 'https://player.vimeo.com/video/824804225?autoplay=1';
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    function closeVideoModal() {
+        videoModal.classList.remove('active');
+        videoIframe.src = '';
+        document.body.style.overflow = '';
+    }
+
+    // Project Modal
+    const projectModal = document.getElementById('projectModal');
+
+    function openProjectModal(id) {
+        projectModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+        projectModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Filter Projects
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-white', 'text-neutral-950');
+                b.classList.add('text-neutral-500', 'border', 'border-neutral-800');
+            });
+            btn.classList.add('bg-white', 'text-neutral-950');
+            btn.classList.remove('text-neutral-500', 'border', 'border-neutral-800');
+
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Close modals on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeVideoModal();
+            closeProjectModal();
+            closeMobileMenu();
+        }
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({behavior: 'smooth'});
+            }
+        });
+    });
+
+    // Selected Works stack animation
+        if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+            const cards = gsap.utils.toArray('.card-item');
+            cards.forEach((card, i) => {
+            const nextCard = cards[i + 1];
+            if (nextCard) {
+                gsap.to(card.querySelector('.card-inner'), {
+                    filter: 'brightness(0.5)',
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: nextCard,
+                        start: 'top bottom',
+                        end: 'top 10vh',
+                        scrub: true
+                    }
+                });
+                }
+            });
+        }
+
+        // Lead form submit
+        const leadForm = document.getElementById('leadForm');
+        const leadSubmitBtn = document.getElementById('leadSubmitBtn');
+        const leadStatus = document.getElementById('leadStatus');
+
+        if (leadForm && leadSubmitBtn && leadStatus) {
+            const errorMessages = {
+                required_fields: 'Заполните все обязательные поля.',
+                consent_required: 'Подтвердите согласие на обработку персональных данных.',
+                invalid_form_token: 'Сессия формы истекла. Обновите страницу и отправьте снова.',
+                invalid_first_name: 'Проверьте корректность имени.',
+                invalid_email: 'Проверьте корректность email.',
+                invalid_phone: 'Проверьте корректность телефона.',
+                message_too_long: 'Сообщение слишком длинное.',
+                payload_too_large: 'Слишком большой объем данных в форме.',
+            };
+
+            leadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                leadStatus.classList.add('hidden');
+
+                const formData = new FormData(leadForm);
+                const payload = {
+                    first_name: (formData.get('first_name') || '').toString().trim(),
+                    email: (formData.get('email') || '').toString().trim(),
+                    phone: (formData.get('phone') || '').toString().trim(),
+                    message: (formData.get('message') || '').toString().trim(),
+                    consent: formData.get('consent') === 'on',
+                    form_token: (formData.get('form_token') || '').toString(),
+                };
+
+                leadSubmitBtn.disabled = true;
+                const oldText = leadSubmitBtn.textContent;
+                leadSubmitBtn.textContent = 'ОТПРАВКА...';
+
+                try {
+                    const resp = await fetch('/api/lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    });
+                    const data = await resp.json().catch(() => ({}));
+                    if (!resp.ok || !data.ok) {
+                        throw new Error(data.error || 'request_failed');
+                    }
+                    leadForm.reset();
+                    leadStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+                    leadStatus.className = 'text-sm text-green-400';
+                } catch (err) {
+                    leadStatus.textContent = errorMessages[err.message] || 'Не удалось отправить заявку. Попробуйте еще раз.';
+                    leadStatus.className = 'text-sm text-red-400';
+                } finally {
+                    leadSubmitBtn.disabled = false;
+                    leadSubmitBtn.textContent = oldText;
+                    leadStatus.classList.remove('hidden');
+                }
+            });
+        }
+
+        // BlurText-like animation (by words, direction top, delay 200ms)
+        const identityBlurText = document.getElementById('identityBlurText');
+        if (identityBlurText) {
+            const text = identityBlurText.textContent.trim();
+            const words = text.split(/\s+/);
+            identityBlurText.textContent = '';
+            const baseDelay = 200;
+            const step = 120;
+
+            words.forEach((word, i) => {
+                const span = document.createElement('span');
+                span.className = 'blur-word';
+                span.style.animationDelay = `${baseDelay + i * step}ms`;
+                span.textContent = word;
+                identityBlurText.appendChild(span);
+                if (i < words.length - 1) {
+                    identityBlurText.appendChild(document.createTextNode(' '));
+                } else {
+                    span.addEventListener('animationend', () => {
+                        console.log('Animation completed!');
+                    }, { once: true });
+                }
+            });
+        }
+    </script>
+
+
+</body>
+</html>
+
+
+

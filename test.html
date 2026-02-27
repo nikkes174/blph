@@ -1,0 +1,593 @@
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XARUHOME | Luxury Brokerage &amp; Real Estate Abu Dhabi</title>
+<meta name="description" content="Premier real estate brokerage in Abu Dhabi specializing in luxury residential properties, premium office spaces, and high-yield commercial investments.">
+<meta name="keywords" content="Abu Dhabi Real Estate, Luxury Properties, Commercial Real Estate, Office Space Abu Dhabi, Property Brokerage">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&amp;family=Syncopate:wght@400;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Icons (Iconify Solar Linear) -->
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<!-- GSAP & Lenis -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+<style>
+/* --- DESIGN SYSTEM TOKENS --- */
+:root {
+--c-bg: #E6E4DF; /* Refined Stone */
+--c-dark: #0A0A0A; /* Almost Black */
+--c-accent: #374336;
+--font-display: 'Syncopate', sans-serif;
+--font-body: 'Manrope', sans-serif;
+}
+body {
+background-color: var(--c-bg);
+color: var(--c-dark);
+font-family: var(--font-body);
+margin: 0;
+overflow-x: hidden;
+cursor: default;
+opacity: 0;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+/* --- LAYOUT UTILITIES --- */
+.wrapper {
+position: relative;
+z-index: 20;
+background-color: var(--c-bg);
+margin-bottom: 100vh; /* Footer Reveal Space */
+box-shadow: 0 50px 100px rgba(0,0,0,0.2);
+will-change: transform;
+}
+/* --- TEXT REVEAL --- */
+.word-wrap {
+display: inline-block;
+overflow: hidden;
+vertical-align: top;
+padding-bottom: 0.05em;
+}
+.word-inner {
+display: inline-block;
+transform: translateY(120%);
+will-change: transform;
+}
+/* --- PRELOADER --- */
+.loader {
+position: fixed;
+inset: 0;
+background: var(--c-dark);
+z-index: 9999;
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff;
+}
+.loader-bar {
+position: absolute;
+bottom: 0;
+left: 0;
+height: 2px;
+background: #fff;
+width: 0%;
+}
+/* --- CARD STACK --- */
+.stack-section {
+background: var(--c-dark);
+color: #E3E1DC;
+position: relative;
+}
+.card-item {
+position: sticky;
+top: 10vh;
+height: 80vh;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.card-inner {
+width: 90%;
+height: 100%;
+background: #111;
+border: 1px solid rgba(255,255,255,0.1);
+position: relative;
+overflow: hidden;
+display: grid;
+grid-template-columns: 1fr 1.5fr;
+border-radius: 4px;
+transform-origin: center top;
+will-change: transform, filter;
+}
+@media (max-width: 1024px) {
+.card-inner { grid-template-columns: 1fr; }
+.card-item { top: 8vh; height: 85vh; }
+}
+/* --- FOOTER --- */
+.footer-sticky {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+z-index: 1;
+background: #050505;
+color: #fff;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+}
+/* --- GLASSMORPHISM (Cleaned Up) --- */
+.glass-morphism {
+background: rgba(255, 255, 255, 0.03);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.12);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+.glass-morphism:hover {
+background: rgba(255, 255, 255, 0.08);
+border-color: rgba(255, 255, 255, 0.2);
+}
+/* --- UTILS --- */
+.font-display { font-family: var(--font-display); }
+.text-balance { text-wrap: balance; }
+/* Noise Texture */
+.noise {
+position: fixed;
+inset: 0;
+z-index: 9000;
+opacity: 0.03;
+pointer-events: none;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar { width: 0px; background: transparent; }
+iconify-icon { display: inline-block; vertical-align: middle; }
+/* HERO ANIMATIONS */
+.hero-char {
+display: inline-block;
+transform: translateY(110%);
+opacity: 0;
+will-change: transform, opacity;
+}
+</style></head>
+<body class="antialiased selection:bg-white/20 selection:text-white">
+
+    <!-- NOISE OVERLAY -->
+    <div class="noise"></div>
+
+    <!-- PRELOADER -->
+    <div class="loader">
+        <div class="loader-text font-display text-4xl md:text-6xl font-bold tracking-tighter">XARUHOME</div>
+        <div class="loader-bar"></div>
+    </div>
+
+    <!-- NAVIGATION (GLASS) -->
+    <nav class="fixed top-0 w-full px-6 py-4 md:px-12 md:py-6 flex justify-between items-center z-50 text-white pointer-events-none">
+
+        <!-- LOGO (Left) -->
+        <div class="glass-morphism pointer-events-auto px-5 py-3 rounded-full flex items-center gap-3 transition-transform duration-300 hover:scale-[1.02] cursor-pointer">
+            <iconify-icon icon="solar:smart-home-angle-linear" class="text-white" width="18"></iconify-icon>
+            <div class="font-display font-semibold text-xs md:text-sm tracking-widest text-white">XARUHOME</div>
+        </div>
+
+        <!-- MENU (Right) -->
+        <div class="glass-morphism pointer-events-auto px-2 py-1.5 rounded-full flex items-center gap-1">
+            <div class="hidden md:flex gap-1 text-[11px] font-medium uppercase tracking-[0.2em]">
+                <a href="#" class="px-5 py-2 hover:bg-white/10 rounded-full transition-all duration-300 text-white/90 hover:text-white">Properties</a>
+                <a href="#" class="px-5 py-2 hover:bg-white/10 rounded-full transition-all duration-300 text-white/90 hover:text-white">Commercial</a>
+                <a href="#" class="px-5 py-2 hover:bg-white/10 rounded-full transition-all duration-300 text-white/90 hover:text-white">Investment</a>
+            </div>
+            <!-- Hamburger for Mobile -->
+            <button class="md:hidden p-3 hover:bg-white/10 rounded-full transition-colors flex items-center justify-center">
+                <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
+            </button>
+        </div>
+    </nav>
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- HERO SECTION -->
+        <section class="h-screen relative flex flex-col items-center justify-center overflow-hidden bg-[#050505]">
+
+            <!-- BACKGROUND IMAGE -->
+            <div class="absolute inset-0 w-full h-full overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea904f92580?q=80&amp;w=2840&amp;auto=format&amp;fit=crop" class="hero-img w-full h-full object-cover brightness-[0.4] scale-110" alt="Abu Dhabi Luxury Real Estate">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80"></div>
+            </div>
+
+            <!-- HERO CONTENT -->
+            <div class="relative z-10 text-center text-white w-full px-4 h-full flex flex-col justify-center pt-20">
+
+                <!-- Main Title -->
+                <div class="flex flex-col items-center justify-center gap-2 drop-shadow-2xl opacity-100">
+                    <h1 class="font-display text-[10vw] md:text-[9vw] leading-[0.85] font-semibold tracking-tighter overflow-hidden flex justify-center gap-[0.5vw]">
+                        <span class="hero-char">L</span>
+                        <span class="hero-char">U</span>
+                        <span class="hero-char">X</span>
+                        <span class="hero-char">U</span>
+                        <span class="hero-char">R</span>
+                        <span class="hero-char">Y</span>
+                    </h1>
+
+                    <h1 class="font-display text-[10vw] md:text-[9vw] leading-[0.85] font-semibold tracking-tighter overflow-hidden flex justify-center gap-[0.5vw]">
+                        <span class="hero-char">B</span>
+                        <span class="hero-char">R</span>
+                        <span class="hero-char">O</span>
+                        <span class="hero-char">K</span>
+                        <span class="hero-char">E</span>
+                        <span class="hero-char">R</span>
+                        <span class="hero-char">A</span>
+                        <span class="hero-char">G</span>
+                        <span class="hero-char">E</span>
+                    </h1>
+
+                    <p class="hero-fade opacity-0 mt-8 text-xs md:text-sm font-light tracking-[0.3em] uppercase text-white/70">
+                        Redefining Assets in Abu Dhabi
+                    </p>
+                </div>
+
+                <!-- Glass Capsule (Bottom Info) -->
+                <div class="absolute bottom-12 left-0 w-full flex justify-center opacity-0 hero-fade">
+                    <div class="glass-morphism rounded-full p-2 pl-8 pr-2 flex items-center gap-8 md:gap-16 max-w-[90vw] transition-colors duration-500">
+                        <div class="flex flex-col text-left">
+                            <span class="text-[9px] uppercase tracking-widest text-white/50 mb-1">Market</span>
+                            <span class="text-[11px] font-semibold tracking-widest text-white">Abu Dhabi</span>
+                        </div>
+
+                        <div class="flex flex-col text-left hidden md:flex">
+                             <span class="text-[9px] uppercase tracking-widest text-white/50 mb-1">Focus</span>
+                             <span class="text-[11px] font-semibold tracking-widest text-white">High-Yield</span>
+                        </div>
+
+                        <div class="flex flex-col text-left hidden md:flex">
+                             <span class="text-[9px] uppercase tracking-widest text-white/50 mb-1">Available</span>
+                             <span class="text-[11px] font-semibold tracking-widest text-white">24 Units</span>
+                        </div>
+
+                        <a href="#" class="h-12 w-12 md:h-14 md:w-14 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition-transform duration-300">
+                            <iconify-icon icon="solar:arrow-down-linear" width="24" height="24"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- INTRO / MANIFESTO -->
+        <section class="py-32 md:py-48 px-6 md:px-12 max-w-[1600px] mx-auto grid md:grid-cols-12 gap-12 items-start">
+            <div class="md:col-span-7">
+                <h2 class="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tighter split-animate text-[var(--c-dark)]">
+                    Curating the <br>
+                    <span class="text-[var(--c-accent)] opacity-80">exceptional.</span>
+                </h2>
+            </div>
+            <div class="md:col-span-5 md:pt-4">
+                <div class="text-lg md:text-xl font-light leading-relaxed text-gray-700 split-animate text-balance">
+                    We are Abu Dhabi's premier real estate consultancy, bridging the gap between vision and value. From high-yield commercial towers to exclusive waterfront residences, we offer bespoke brokerage services for investors who demand excellence.
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-black/10 flex flex-col gap-4">
+                    <div class="flex justify-between text-xs uppercase tracking-[0.15em] font-semibold text-gray-500">
+                        <span>Luxury Residential</span>
+                        <span>01</span>
+                    </div>
+                    <div class="flex justify-between text-xs uppercase tracking-[0.15em] font-semibold text-gray-500">
+                        <span>Commercial &amp; Offices</span>
+                        <span>02</span>
+                    </div>
+                    <div class="flex justify-between text-xs uppercase tracking-[0.15em] font-semibold text-gray-500">
+                        <span>Investment Management</span>
+                        <span>03</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SELECTED WORKS (STACK) -->
+        <section class="stack-section py-24 md:py-32">
+            <div class="px-6 md:px-12 mb-20 flex justify-between items-end max-w-[1600px] mx-auto">
+                <div>
+                    <span class="block text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">Exclusive Portfolio</span>
+                    <h2 class="font-display text-4xl md:text-6xl tracking-tighter">Featured Listings</h2>
+                </div>
+                <div class="hidden md:block text-right">
+                    <span class="text-xs font-medium text-white/40 uppercase tracking-widest">Market: Abu Dhabi</span>
+                </div>
+            </div>
+
+            <div class="w-full max-w-[1600px] mx-auto pb-[10vh]">
+
+                <!-- Listing 01 -->
+                <div class="card-item group">
+                    <div class="card-inner">
+                        <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                            <div>
+                                <div class="font-display text-4xl text-white/10 mb-6">01</div>
+                                <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Global Market Tower</h3>
+                                <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Al Maryah Island, Abu Dhabi</span>
+                            </div>
+
+                            <div class="max-w-xs">
+                                <p class="text-sm font-light text-gray-400 leading-relaxed mb-8">
+                                    Grade A office space in the heart of the financial district. Full floor availability with panoramic views of the skyline.
+                                </p>
+                                <a href="#" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest hover:text-white/70 transition-colors">
+                                    View Listing <iconify-icon icon="solar:arrow-right-up-linear" width="16" height="16"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative h-full overflow-hidden order-first md:order-last">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105" alt="Office Tower">
+                            <div class="absolute inset-0 bg-black/10"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listing 02 -->
+                <div class="card-item group">
+                    <div class="card-inner">
+                        <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                            <div>
+                                <div class="font-display text-4xl text-white/10 mb-6">02</div>
+                                <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Saadiyat Grove</h3>
+                                <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Saadiyat Cultural District</span>
+                            </div>
+
+                            <div class="max-w-xs">
+                                <p class="text-sm font-light text-gray-400 leading-relaxed mb-8">
+                                    Ultra-luxury 4BR penthouse overlooking the Louvre Abu Dhabi. Featuring private elevator access and smart home integration.
+                                </p>
+                                <a href="#" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest hover:text-white/70 transition-colors">
+                                    View Listing <iconify-icon icon="solar:arrow-right-up-linear" width="16" height="16"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative h-full overflow-hidden order-first md:order-last">
+                            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/952269bf-60f5-48dc-afce-13953bead1eb_1600w.webp" class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105" alt="Luxury Interior">
+                            <div class="absolute inset-0 bg-black/10"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listing 03 -->
+                <div class="card-item group">
+                    <div class="card-inner">
+                        <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                            <div>
+                                <div class="font-display text-4xl text-white/10 mb-6">03</div>
+                                <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Yas Creative Hub</h3>
+                                <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Yas Island, Abu Dhabi</span>
+                            </div>
+
+                            <div class="max-w-xs">
+                                <p class="text-sm font-light text-gray-400 leading-relaxed mb-8">
+                                    Flexible commercial spaces designed for media and tech companies. High ROI investment opportunity.
+                                </p>
+                                <a href="#" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest hover:text-white/70 transition-colors">
+                                    View Listing <iconify-icon icon="solar:arrow-right-up-linear" width="16" height="16"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative h-full overflow-hidden order-first md:order-last">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105" alt="Creative Office">
+                            <div class="absolute inset-0 bg-black/10"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listing 04 -->
+                <div class="card-item group">
+                    <div class="card-inner">
+                        <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                            <div>
+                                <div class="font-display text-4xl text-white/10 mb-6">04</div>
+                                <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Etihad Towers</h3>
+                                <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Corniche, Abu Dhabi</span>
+                            </div>
+
+                            <div class="max-w-xs">
+                                <p class="text-sm font-light text-gray-400 leading-relaxed mb-8">
+                                    Premium full-floor penthouses and corporate headquarters. Iconic architecture offering unparalleled views.
+                                </p>
+                                <a href="#" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest hover:text-white/70 transition-colors">
+                                    View Listing <iconify-icon icon="solar:arrow-right-up-linear" width="16" height="16"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative h-full overflow-hidden order-first md:order-last">
+                            <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 grayscale hover:grayscale-0" alt="Etihad Towers">
+                            <div class="absolute inset-0 bg-black/10"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PHILOSOPHY SECTION -->
+        <section class="py-32 md:py-48 px-6 bg-[var(--c-bg)] text-center flex flex-col items-center">
+            <h2 class="font-display text-3xl md:text-5xl lg:text-6xl tracking-tighter mb-8 split-animate">Investment in Excellence</h2>
+            <div class="max-w-2xl text-gray-600 font-light text-lg md:text-xl leading-relaxed mb-16 split-animate text-balance">
+                Our philosophy is rooted in data-driven insight and exclusive access. We don't just find properties; we secure high-performing assets that build long-term wealth and legacy.
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-20 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">
+                <div class="flex flex-col items-center gap-4">
+                    <iconify-icon icon="solar:graph-up-linear" width="24" height="24"></iconify-icon>
+                    <span>Yield</span>
+                </div>
+                <div class="flex flex-col items-center gap-4">
+                    <iconify-icon icon="solar:map-point-linear" width="24" height="24"></iconify-icon>
+                    <span>Location</span>
+                </div>
+                <div class="flex flex-col items-center gap-4">
+                    <iconify-icon icon="solar:shield-check-linear" width="24" height="24"></iconify-icon>
+                    <span>Security</span>
+                </div>
+                <div class="flex flex-col items-center gap-4">
+                    <iconify-icon icon="solar:crown-linear" width="24" height="24"></iconify-icon>
+                    <span>Prestige</span>
+                </div>
+            </div>
+
+            <div class="h-24 w-px bg-gradient-to-b from-gray-300 to-transparent mt-24"></div>
+        </section>
+
+    </div>
+    <!-- END WRAPPER -->
+
+    <!-- FOOTER (FIXED) -->
+    <footer class="footer-sticky">
+        <div class="absolute inset-0 z-0">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1c6b6980-54e4-4d8c-9ff6-e09b844d7b01_3840w.webp" class="w-full h-full object-cover opacity-20 grayscale" alt="Footer Background">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 text-center w-full px-4">
+            <div class="text-xs uppercase tracking-[0.3em] mb-8 text-gray-500 font-semibold">Acquire Your Next Asset</div>
+
+            <a href="mailto:invest@xaruhome.com" class="group block w-fit mx-auto relative overflow-hidden">
+                <span class="text-white font-display text-[12vw] leading-[0.85] tracking-tighter block transition-transform duration-500 group-hover:-translate-y-full">INQUIRE</span>
+                <span class="text-white font-display text-[12vw] leading-[0.85] tracking-tighter block absolute top-0 left-0 translate-y-full transition-transform duration-500 group-hover:translate-y-0 text-gray-500">INQUIRE</span>
+            </a>
+
+            <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-[1400px] mx-auto mt-24 px-6 md:px-12">
+                <div class="text-[10px] uppercase tracking-widest text-gray-600 mb-6 md:mb-0">
+                    © 2025 XARUHOME Real Estate<br>Abu Dhabi, UAE
+                </div>
+
+                <div class="flex gap-12 text-xs uppercase tracking-[0.2em] font-medium text-gray-400">
+                    <a href="#" class="hover:text-white transition-colors">Listings</a>
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="#" class="hover:text-white transition-colors">Whatsapp</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- LENIS SMOOTH SCROLL ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            smooth: true,
+            smoothTouch: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- GSAP SETUP ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- TEXT SPLITTING ---
+        const splitText = (selector) => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                const text = el.innerText;
+                el.innerHTML = text.split(' ').map(word =>
+                    `<span class="word-wrap"><span class="word-inner">${word}&nbsp;</span></span>`
+                ).join('');
+            });
+        };
+        splitText('.split-animate');
+
+        // --- PRELOADER SEQUENCE ---
+        const tl = gsap.timeline({
+            onComplete: () => {
+                document.body.style.overflow = 'visible';
+                initAnimations();
+            }
+        });
+
+        tl.to('.loader-bar', { width: '100%', duration: 1.2, ease: 'expo.inOut' })
+          .to('.loader-text', { y: -50, opacity: 0, duration: 0.6, ease: 'power3.in' }, "-=0.2")
+          .to('.loader', { yPercent: -100, duration: 1.0, ease: 'power4.inOut' })
+          .set('body', { opacity: 1 }, 0);
+
+        // --- SITE ANIMATIONS ---
+        function initAnimations() {
+
+            // Hero Letter Effect (Clean Slide Up)
+            const heroTl = gsap.timeline();
+            heroTl.to('.hero-char', {
+                y: 0,
+                opacity: 1,
+                stagger: 0.05,
+                duration: 1.5,
+                ease: 'power4.out',
+                delay: 0.2
+            })
+            .to('.hero-fade', { opacity: 1, duration: 1, y: 0 }, "-=1");
+
+            // Hero Parallax
+            gsap.to('.hero-img', {
+                yPercent: 20,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.wrapper',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+
+            // Text Reveals
+            document.querySelectorAll('.split-animate').forEach(el => {
+                gsap.to(el.querySelectorAll('.word-inner'), {
+                    y: "0%",
+                    duration: 1.2,
+                    ease: "power3.out",
+                    stagger: 0.015,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                    }
+                });
+            });
+
+            // Card Stack Logic
+            const cards = gsap.utils.toArray('.card-item');
+            cards.forEach((card, i) => {
+                const nextCard = cards[i + 1];
+                if (nextCard) {
+                    gsap.to(card.querySelector('.card-inner'), {
+                        filter: "brightness(0.5)",
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: nextCard,
+                            start: "top bottom",
+                            end: "top 10vh",
+                            scrub: true
+                        }
+                    });
+                }
+            });
+
+            // Footer Parallax Content
+            gsap.from('.footer-sticky > div.relative', {
+                y: 150,
+                opacity: 0.5,
+                scrollTrigger: {
+                    trigger: '.wrapper',
+                    start: 'bottom 100%',
+                    end: 'bottom 20%',
+                    scrub: true
+                }
+            });
+        }
+    </script>
+
+</body></html>
