@@ -3,11 +3,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-          content="[NOM] вЂ” RГ©alisateur, Directeur Photo &amp; Monteur basГ© Г  [VILLE]. Portfolio de films, clips et contenus crГ©atifs.">
+      content="IT-компания по разработке веб-сервисов, SaaS-платформ и цифровых решений для бизнеса. Интеграции, AI-технологии, автоматизация процессов и масштабируемая архитектура.">
     <meta property="og:title" content="[NOM] вЂ” Director вЂў DP вЂў Editor">
     <meta property="og:description" content="Portfolio vidГ©o вЂ” RГ©alisation, cadre, montage et Г©talonnage.">
     <meta property="og:type" content="website">
-    <title>Black Phantom</title>
+    <title>BLACK PHANTOM</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='files/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -319,7 +320,7 @@
 <!-- Hero Section -->
 <section id="home" class="relative h-screen w-full overflow-hidden">
     <!-- Video Background -->
-    <video id="heroVideo" class="absolute inset-0 w-full h-full video-bg" autoplay="" loop="" muted="" playsinline=""
+    <video id="heroVideo" class="absolute inset-0 w-full h-full video-bg" autoplay="" loop="" muted="" playsinline="" preload="metadata"
            poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1920&amp;q=80">
         <source id="heroVideoSource"
                 src="{{ url_for('static', path='files/ph.mp4') }}"
@@ -940,8 +941,11 @@
             pagePreloader.classList.remove('is-hidden');
         }
     };
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(hidePreloader, 120);
+    });
     window.addEventListener('load', () => {
-        setTimeout(hidePreloader, 220);
+        setTimeout(hidePreloader, 0);
     });
     window.addEventListener('beforeunload', showPreloader);
     document.querySelectorAll('a[href]').forEach((link) => {
