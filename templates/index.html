@@ -232,6 +232,25 @@
             pointer-events: none;
         }
 
+        .preloader-logo {
+            animation: preloaderPulse 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
+            will-change: transform, filter, opacity;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.92;
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+            }
+            50% {
+                transform: scale(1.07);
+                opacity: 1;
+                filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.55));
+            }
+        }
+
         @media (max-width: 1024px) {
             .card-inner {
                 grid-template-columns: 1fr;
@@ -255,7 +274,7 @@
 
 <div id="pagePreloader" class="preloader">
     <div class="flex flex-col items-center gap-4">
-        <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo" class="w-20 h-20 object-contain">
+        <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo" class="w-20 h-20 object-contain preloader-logo">
         <span class="text-sm tracking-[0.25em] text-white/80">BLACK PHANTOM</span>
     </div>
 </div>
@@ -865,7 +884,7 @@
                         <textarea id="message" name="message" rows="4" required=""
                                   class="w-full bg-transparent border-b border-neutral-700 focus:border-white py-3 text-white outline-none transition-colors placeholder:text-neutral-600 resize-none"
                                   maxlength="4000"
-                                  placeholder="Опишите ваш запрос..."></textarea>
+                                  placeholder="Опишите ваш проект..."></textarea>
                     </div>
                     <label class="flex items-start gap-3 text-sm text-neutral-400 leading-relaxed">
                         <input type="checkbox" name="consent" required="" class="mt-1 accent-white">
