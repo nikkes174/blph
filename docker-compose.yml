@@ -1,38 +1,19 @@
+version: "3.9"
+
 services:
   app:
     build: .
     container_name: finalsite_app
+    command: uvicorn main:app --host 0.0.0.0 --port 8041
     env_file:
       - .env
     expose:
       - "8041"
     restart: unless-stopped
+    networks:
+      - investstroi_net
 
-  nginx:
-    image: nginx:1.27-alpine
-    container_name: finalsite_nginx
-    depends_on:
-      - app
-    env_file:
-      - .env
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
-      - certbot-etc:/etc/letsencrypt
-      - certbot-www:/var/www/certbot
-    restart: unless-stopped
-
-  certbot:
-    image: certbot/certbot:latest
-    container_name: finalsite_certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-www:/var/www/certbot
-    profiles:
-      - certbot
-
-volumes:
-  certbot-etc:
-  certbot-www:
+networks:
+  investstroi_net:
+    external: true
+    name: investstroi_default
