@@ -1,14 +1,15 @@
 ﻿import hashlib
 import hmac
-import html
 import json
 import logging
 import os
 import re
+import socket
 import secrets
+import smtplib
 import time
-import urllib.error
-import urllib.request
+from email.message import EmailMessage
+from pathlib import Path
 
 import uvicorn
 from dotenv import load_dotenv
@@ -31,11 +32,18 @@ MAX_PHONE_LEN = 32
 MAX_MESSAGE_LEN = 4000
 FORM_TOKEN_TTL_SECONDS = 30 * 60
 FORM_TOKEN_SECRET = os.getenv('FORM_TOKEN_SECRET') or secrets.token_hex(32)
+FAILED_LEADS_PATH = Path(os.getenv('FAILED_LEADS_PATH') or 'data/failed_leads.jsonl')
+LEAD_EMAIL_TO = os.getenv('LEAD_EMAIL_TO') or 'pride174@mail.ru'
+SMTP_HOST = os.getenv('SMTP_HOST') or 'smtp.mail.ru'
+SMTP_PORT = int(os.getenv('SMTP_PORT') or '465')
+SMTP_USERNAME = os.getenv('SMTP_USERNAME') or LEAD_EMAIL_TO
+SMTP_PASSWORD = os.getenv('SMTP_PASSWORD') or ''
+SMTP_USE_SSL = (os.getenv('SMTP_USE_SSL') or 'true').lower() not in ('0', 'false', 'no')
+SMTP_TIMEOUT_SECONDS = int(os.getenv('SMTP_TIMEOUT_SECONDS') or '20')
 
 NAME_RE = re.compile(r'^[A-Za-zА-Яа-яЁё\-\s]{1,60}$')
 PHONE_RE = re.compile(r'^[0-9+\-\s()]{6,32}$')
 EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
-
 
 def _make_form_token() -> str:
     ts = int(time.time())
@@ -83,46 +91,54 @@ async def read_privacy(request: Request):
     return templates.TemplateResponse(request=request, name='privacy.html')
 
 
-def _send_telegram_message(text: str) -> tuple[bool, str]:
-    token = os.getenv('TELEGRAM_BOT_TOKEN')
-    chat_id = os.getenv('TELEGRAM_CHAT_ID')
-    if not token or not chat_id:
-        return False, 'Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID'
+def _send_lead_email(first_name: str, email: str, phone: str, message: str) -> tuple[bool, str]:
+    if not SMTP_PASSWORD:
+        return False, 'Missing SMTP_PASSWORD'
 
-    api_base = (os.getenv('TELEGRAM_API_BASE') or 'https://api.telegram.org').rstrip('/')
-    url = f'{api_base}/bot{token}/sendMessage'
-    payload = {
-        'chat_id': chat_id,
-        'text': text,
-        'parse_mode': 'HTML',
-        'disable_web_page_preview': True,
-    }
-    data = json.dumps(payload).encode('utf-8')
-    req = urllib.request.Request(
-        url,
-        data=data,
-        headers={'Content-Type': 'application/json'},
-        method='POST',
+    msg = EmailMessage()
+    msg['Subject'] = 'Новая заявка с сайта'
+    msg['From'] = SMTP_USERNAME
+    msg['To'] = LEAD_EMAIL_TO
+    msg['Reply-To'] = email
+    msg.set_content(
+        '\n'.join([
+            'Новая заявка с сайта',
+            f'Имя: {first_name}',
+            f'Email: {email}',
+            f'Телефон: {phone}',
+            'Сообщение:',
+            message,
+        ])
     )
-    proxy_url = os.getenv('TELEGRAM_PROXY_URL') or os.getenv('HTTPS_PROXY') or os.getenv('https_proxy')
-    opener = urllib.request.build_opener(
-        urllib.request.ProxyHandler({'http': proxy_url, 'https': proxy_url})
-        if proxy_url
-        else urllib.request.ProxyHandler({})
-    )
+
     try:
-        with opener.open(req, timeout=10) as resp:
-            if 200 <= resp.status < 300:
-                return True, ''
-            return False, f'Telegram API error: {resp.status}'
-    except urllib.error.HTTPError as exc:
-        try:
-            body = exc.read().decode('utf-8', errors='replace')
-        except Exception:
-            body = '<failed to read body>'
-        return False, f'Telegram HTTP error: {exc.code}; body: {body}'
+        if SMTP_USE_SSL:
+            with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, timeout=SMTP_TIMEOUT_SECONDS) as server:
+                server.login(SMTP_USERNAME, SMTP_PASSWORD)
+                server.send_message(msg)
+        else:
+            with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=SMTP_TIMEOUT_SECONDS) as server:
+                server.starttls()
+                server.login(SMTP_USERNAME, SMTP_PASSWORD)
+                server.send_message(msg)
+        return True, ''
+    except (TimeoutError, socket.timeout) as exc:
+        return False, f'SMTP timeout: {exc}'
+    except smtplib.SMTPException as exc:
+        return False, f'SMTP error: {exc}'
     except Exception as exc:
-        return False, f'Telegram request failed: {exc}'
+        return False, f'Email delivery failed: {exc}'
+
+
+def _store_failed_lead(payload: dict, error: str) -> None:
+    FAILED_LEADS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    record = {
+        'created_at': int(time.time()),
+        'error': error,
+        'payload': payload,
+    }
+    with FAILED_LEADS_PATH.open('a', encoding='utf-8') as fh:
+        fh.write(json.dumps(record, ensure_ascii=False) + '\n')
 
 
 @app.post('/api/lead')
@@ -181,23 +197,19 @@ async def create_lead(request: Request):
     if len(message) > MAX_MESSAGE_LEN:
         return fail(400, 'message_too_long')
 
-    safe_name = html.escape(first_name)
-    safe_email = html.escape(email)
-    safe_phone = html.escape(phone)
-    safe_message = html.escape(message)
-
-    lines = [
-        '<b>Новая заявка с сайта</b>',
-        f'Имя: {safe_name}',
-        f'Email: {safe_email}',
-        f'Телефон: {safe_phone}',
-        f'Сообщение: {safe_message}',
-    ]
-
-    ok, err = _send_telegram_message('\n'.join(lines))
+    ok, err = _send_lead_email(first_name, email, phone, message)
     if not ok:
         logger.error('Lead delivery failed: %s', err)
-        return JSONResponse({'ok': False, 'error': err}, status_code=502)
+        _store_failed_lead(
+            {
+                'first_name': first_name,
+                'email': email,
+                'phone': phone,
+                'message': message,
+            },
+            err,
+        )
+        return JSONResponse({'ok': True, 'queued': True})
 
     return JSONResponse({'ok': True})
 
