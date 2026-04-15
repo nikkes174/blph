@@ -11,9 +11,57 @@
     <style>
         * { font-family: 'Inter', sans-serif; }
         .font-display { font-family: 'Playfair Display', serif; }
+        .preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        body.is-loading {
+            overflow: hidden;
+        }
+        body.is-loading *:not(.preloader):not(.preloader *),
+        body.is-loading *:not(.preloader):not(.preloader *)::before,
+        body.is-loading *:not(.preloader):not(.preloader *)::after {
+            animation-play-state: paused !important;
+        }
+        .preloader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .preloader-logo {
+            animation: preloaderPulse 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
+            will-change: transform, filter, opacity;
+        }
+        @keyframes preloaderPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.92;
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+            }
+            50% {
+                transform: scale(1.07);
+                opacity: 1;
+                filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.55));
+            }
+        }
     </style>
 </head>
-<body class="bg-neutral-950 text-neutral-100 antialiased">
+<body class="bg-neutral-950 text-neutral-100 antialiased is-loading">
+    <div id="pagePreloader" class="preloader">
+        <div class="flex flex-col items-center gap-4">
+            <img src="{{ url_for('static', path='files/logo.png') }}" alt="BLACK PHANTOM"
+                 class="w-20 h-20 object-contain preloader-logo">
+            <span class="text-sm tracking-[0.25em] text-white/80">BLACK PHANTOM</span>
+        </div>
+    </div>
+
     <main class="min-h-screen px-6 lg:px-12 py-16 lg:py-24">
         <div class="max-w-4xl mx-auto">
             <a href="/" class="inline-flex items-center text-sm text-neutral-400 hover:text-white transition-colors mb-10">← На главную</a>
@@ -102,5 +150,54 @@
             </div>
         </div>
     </main>
+    <script>
+        const pagePreloader = document.getElementById('pagePreloader');
+        const waitForImage = (image) => {
+            if (image.complete && image.naturalWidth !== 0) {
+                return Promise.resolve();
+            }
+            return new Promise((resolve) => {
+                image.addEventListener('load', resolve, {once: true});
+                image.addEventListener('error', resolve, {once: true});
+            });
+        };
+        const waitForWindowLoad = () => {
+            if (document.readyState === 'complete') {
+                return Promise.resolve();
+            }
+            return new Promise((resolve) => window.addEventListener('load', resolve, {once: true}));
+        };
+        const hidePreloader = () => {
+            if (pagePreloader) {
+                document.body.classList.remove('is-loading');
+                pagePreloader.classList.add('is-hidden');
+                window.setTimeout(() => pagePreloader.setAttribute('aria-hidden', 'true'), 400);
+            }
+        };
+        const showPreloader = () => {
+            if (pagePreloader) {
+                pagePreloader.removeAttribute('aria-hidden');
+                pagePreloader.classList.remove('is-hidden');
+                document.body.classList.add('is-loading');
+            }
+        };
+        Promise.all([
+            waitForWindowLoad(),
+            document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => undefined) : Promise.resolve(),
+            ...Array.from(document.images).map(waitForImage),
+        ]).then(() => window.setTimeout(hidePreloader, 250));
+        window.addEventListener('beforeunload', showPreloader);
+        document.querySelectorAll('a[href]').forEach((link) => {
+            link.addEventListener('click', () => {
+                const href = link.getAttribute('href') || '';
+                const isHash = href.startsWith('#');
+                const isExternal = link.target === '_blank';
+                const isSpecial = href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:');
+                if (!isHash && !isExternal && !isSpecial) {
+                    showPreloader();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

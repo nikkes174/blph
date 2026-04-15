@@ -227,6 +227,16 @@
             transition: opacity 0.35s ease, visibility 0.35s ease;
         }
 
+        body.is-loading {
+            overflow: hidden;
+        }
+
+        body.is-loading *:not(.preloader):not(.preloader *),
+        body.is-loading *:not(.preloader):not(.preloader *)::before,
+        body.is-loading *:not(.preloader):not(.preloader *)::after {
+            animation-play-state: paused !important;
+        }
+
         .preloader.is-hidden {
             opacity: 0;
             visibility: hidden;
@@ -330,7 +340,7 @@
         }
     </style>
 </head>
-<body class="bg-neutral-950 text-neutral-100 antialiased">
+<body class="bg-neutral-950 text-neutral-100 antialiased is-loading">
 
 <div id="pagePreloader" class="preloader">
     <div class="flex flex-col items-center gap-4">
@@ -1122,37 +1132,6 @@
 </footer>
 
 <script>
-    // Global preloader
-    const pagePreloader = document.getElementById('pagePreloader');
-    const hidePreloader = () => {
-        if (pagePreloader) {
-            pagePreloader.classList.add('is-hidden');
-        }
-    };
-    const showPreloader = () => {
-        if (pagePreloader) {
-            pagePreloader.classList.remove('is-hidden');
-        }
-    };
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(hidePreloader, 120);
-    });
-    window.addEventListener('load', () => {
-        setTimeout(hidePreloader, 0);
-    });
-    window.addEventListener('beforeunload', showPreloader);
-    document.querySelectorAll('a[href]').forEach((link) => {
-        link.addEventListener('click', () => {
-            const href = link.getAttribute('href') || '';
-            const isHash = href.startsWith('#');
-            const isExternal = link.target === '_blank';
-            const isSpecial = href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:');
-            if (!isHash && !isExternal && !isSpecial) {
-                showPreloader();
-            }
-        });
-    });
-
     // Mobile/desktop hero video source switch
     const heroVideo = document.getElementById('heroVideo');
     const heroVideoSource = document.getElementById('heroVideoSource');
@@ -1166,6 +1145,91 @@
             heroVideo.load();
         }
     }
+
+    // Global preloader
+    const pagePreloader = document.getElementById('pagePreloader');
+    const withPreloaderTimeout = (promise, delay = 9000) => Promise.race([
+        promise,
+        new Promise((resolve) => window.setTimeout(resolve, delay)),
+    ]);
+    const waitForImage = (image) => {
+        if (image.complete && image.naturalWidth !== 0) {
+            return Promise.resolve();
+        }
+        return new Promise((resolve) => {
+            image.addEventListener('load', resolve, {once: true});
+            image.addEventListener('error', resolve, {once: true});
+        });
+    };
+    const waitForVideo = (video) => {
+        if (video.readyState >= 2) {
+            return Promise.resolve();
+        }
+        return withPreloaderTimeout(new Promise((resolve) => {
+            video.addEventListener('loadeddata', resolve, {once: true});
+            video.addEventListener('canplay', resolve, {once: true});
+            video.addEventListener('error', resolve, {once: true});
+        }));
+    };
+    const waitForUnicornStudio = () => {
+        const unicornHost = document.querySelector('[data-us-project]');
+        if (!unicornHost) {
+            return Promise.resolve();
+        }
+        return withPreloaderTimeout(new Promise((resolve) => {
+            const checkReady = () => {
+                const unicornReady = window.UnicornStudio && window.UnicornStudio.isInitialized;
+                if (unicornReady || unicornHost.children.length > 0) {
+                    resolve();
+                    return;
+                }
+                window.setTimeout(checkReady, 120);
+            };
+            checkReady();
+        }), 7000);
+    };
+    const waitForWindowLoad = () => {
+        if (document.readyState === 'complete') {
+            return Promise.resolve();
+        }
+        return new Promise((resolve) => window.addEventListener('load', resolve, {once: true}));
+    };
+    const waitForPageReady = () => Promise.all([
+        waitForWindowLoad(),
+        document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => undefined) : Promise.resolve(),
+        ...Array.from(document.images).map(waitForImage),
+        ...Array.from(document.querySelectorAll('video')).map(waitForVideo),
+        waitForUnicornStudio(),
+    ]);
+    const hidePreloader = () => {
+        if (pagePreloader) {
+            document.body.classList.remove('is-loading');
+            pagePreloader.classList.add('is-hidden');
+            window.setTimeout(() => pagePreloader.setAttribute('aria-hidden', 'true'), 400);
+        }
+    };
+    const showPreloader = () => {
+        if (pagePreloader) {
+            pagePreloader.removeAttribute('aria-hidden');
+            pagePreloader.classList.remove('is-hidden');
+            document.body.classList.add('is-loading');
+        }
+    };
+    waitForPageReady().then(() => {
+        window.setTimeout(hidePreloader, 250);
+    });
+    window.addEventListener('beforeunload', showPreloader);
+    document.querySelectorAll('a[href]').forEach((link) => {
+        link.addEventListener('click', () => {
+            const href = link.getAttribute('href') || '';
+            const isHash = href.startsWith('#');
+            const isExternal = link.target === '_blank';
+            const isSpecial = href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:');
+            if (!isHash && !isExternal && !isSpecial) {
+                showPreloader();
+            }
+        });
+    });
 
     // Mobile Menu
     const menuBtn = document.getElementById('menuBtn');
