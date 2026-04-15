@@ -1148,59 +1148,20 @@
 
     // Global preloader
     const pagePreloader = document.getElementById('pagePreloader');
-    const withPreloaderTimeout = (promise, delay = 9000) => Promise.race([
+    const withPreloaderTimeout = (promise, delay = 900) => Promise.race([
         promise,
         new Promise((resolve) => window.setTimeout(resolve, delay)),
     ]);
-    const waitForImage = (image) => {
-        if (image.complete && image.naturalWidth !== 0) {
+    const waitForDomReady = () => {
+        if (document.readyState !== 'loading') {
             return Promise.resolve();
         }
-        return new Promise((resolve) => {
-            image.addEventListener('load', resolve, {once: true});
-            image.addEventListener('error', resolve, {once: true});
-        });
+        return new Promise((resolve) => document.addEventListener('DOMContentLoaded', resolve, {once: true}));
     };
-    const waitForVideo = (video) => {
-        if (video.readyState >= 2) {
-            return Promise.resolve();
-        }
-        return withPreloaderTimeout(new Promise((resolve) => {
-            video.addEventListener('loadeddata', resolve, {once: true});
-            video.addEventListener('canplay', resolve, {once: true});
-            video.addEventListener('error', resolve, {once: true});
-        }));
-    };
-    const waitForUnicornStudio = () => {
-        const unicornHost = document.querySelector('[data-us-project]');
-        if (!unicornHost) {
-            return Promise.resolve();
-        }
-        return withPreloaderTimeout(new Promise((resolve) => {
-            const checkReady = () => {
-                const unicornReady = window.UnicornStudio && window.UnicornStudio.isInitialized;
-                if (unicornReady || unicornHost.children.length > 0) {
-                    resolve();
-                    return;
-                }
-                window.setTimeout(checkReady, 120);
-            };
-            checkReady();
-        }), 7000);
-    };
-    const waitForWindowLoad = () => {
-        if (document.readyState === 'complete') {
-            return Promise.resolve();
-        }
-        return new Promise((resolve) => window.addEventListener('load', resolve, {once: true}));
-    };
-    const waitForPageReady = () => Promise.all([
-        waitForWindowLoad(),
+    const waitForPageReady = () => withPreloaderTimeout(Promise.all([
+        waitForDomReady(),
         document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => undefined) : Promise.resolve(),
-        ...Array.from(document.images).map(waitForImage),
-        ...Array.from(document.querySelectorAll('video')).map(waitForVideo),
-        waitForUnicornStudio(),
-    ]);
+    ]));
     const hidePreloader = () => {
         if (pagePreloader) {
             document.body.classList.remove('is-loading');
@@ -1216,7 +1177,7 @@
         }
     };
     waitForPageReady().then(() => {
-        window.setTimeout(hidePreloader, 250);
+        window.setTimeout(hidePreloader, 120);
     });
     window.addEventListener('beforeunload', showPreloader);
     document.querySelectorAll('a[href]').forEach((link) => {

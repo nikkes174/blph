@@ -152,20 +152,15 @@
     </main>
     <script>
         const pagePreloader = document.getElementById('pagePreloader');
-        const waitForImage = (image) => {
-            if (image.complete && image.naturalWidth !== 0) {
+        const withPreloaderTimeout = (promise, delay = 900) => Promise.race([
+            promise,
+            new Promise((resolve) => window.setTimeout(resolve, delay)),
+        ]);
+        const waitForDomReady = () => {
+            if (document.readyState !== 'loading') {
                 return Promise.resolve();
             }
-            return new Promise((resolve) => {
-                image.addEventListener('load', resolve, {once: true});
-                image.addEventListener('error', resolve, {once: true});
-            });
-        };
-        const waitForWindowLoad = () => {
-            if (document.readyState === 'complete') {
-                return Promise.resolve();
-            }
-            return new Promise((resolve) => window.addEventListener('load', resolve, {once: true}));
+            return new Promise((resolve) => document.addEventListener('DOMContentLoaded', resolve, {once: true}));
         };
         const hidePreloader = () => {
             if (pagePreloader) {
@@ -181,11 +176,10 @@
                 document.body.classList.add('is-loading');
             }
         };
-        Promise.all([
-            waitForWindowLoad(),
+        withPreloaderTimeout(Promise.all([
+            waitForDomReady(),
             document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => undefined) : Promise.resolve(),
-            ...Array.from(document.images).map(waitForImage),
-        ]).then(() => window.setTimeout(hidePreloader, 250));
+        ])).then(() => window.setTimeout(hidePreloader, 120));
         window.addEventListener('beforeunload', showPreloader);
         document.querySelectorAll('a[href]').forEach((link) => {
             link.addEventListener('click', () => {
