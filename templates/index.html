@@ -3,9 +3,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-      content="IT-компания по разработке веб-сервисов, SaaS-платформ и цифровых решений для бизнеса. Интеграции, AI-технологии, автоматизация процессов и масштабируемая архитектура.">
+          content="IT-компания по разработке веб-сервисов, SaaS-платформ и цифровых решений для бизнеса. Интеграции, AI-технологии, автоматизация процессов и масштабируемая архитектура.">
     <meta property="og:title" content="Black Phantom — Комплексные IT-решения">
-    <meta property="og:description" content="Инженерные решения для современного бизнеса: веб-платформы, AI и автоматизация процессов.">
+    <meta property="og:description"
+          content="Инженерные решения для современного бизнеса: веб-платформы, AI и автоматизация процессов.">
     <meta property="og:type" content="website">
     <title>BLACK PHANTOM</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', path='files/ph.mp4') }}">
@@ -333,7 +334,8 @@
 
 <div id="pagePreloader" class="preloader">
     <div class="flex flex-col items-center gap-4">
-        <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo" class="w-20 h-20 object-contain preloader-logo">
+        <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo"
+             class="w-20 h-20 object-contain preloader-logo">
         <span class="text-sm tracking-[0.25em] text-white/80">BLACK PHANTOM</span>
     </div>
 </div>
@@ -343,7 +345,8 @@
     <div class="flex items-center justify-between max-w-screen-2xl mx-auto">
         <a href="#home"
            class="inline-flex items-center gap-2 text-sm font-medium tracking-tighter text-white hover:text-neutral-300 transition-colors">
-            <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo" class="w-6 h-6 object-contain">
+            <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo"
+                 class="w-6 h-6 object-contain">
             <span>BLACK PHANTOM</span>
         </a>
 
@@ -374,7 +377,8 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <button id="menuBtn" class="md:hidden text-white bg-neutral-900/85 border border-neutral-700 rounded-md p-2 hover:bg-neutral-800 transition-colors">
+        <button id="menuBtn"
+                class="md:hidden text-white bg-neutral-900/85 border border-neutral-700 rounded-md p-2 hover:bg-neutral-800 transition-colors">
             <iconify-icon icon="solar:hamburger-menu-linear" width="24" height="24"
                           style="stroke-width: 1.5;"></iconify-icon>
         </button>
@@ -382,7 +386,8 @@
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobileMenu" class="fixed inset-y-0 right-0 z-[70] w-80 max-w-[85vw] bg-black flex flex-col items-start justify-start gap-6 pt-24 px-8 pb-8 modal border-l border-neutral-800">
+<div id="mobileMenu"
+     class="fixed inset-y-0 right-0 z-[70] w-80 max-w-[85vw] bg-black flex flex-col items-start justify-start gap-6 pt-24 px-8 pb-8 modal border-l border-neutral-800">
     <a href="#about-us" class="text-2xl font-light text-white hover:text-neutral-300 transition-colors"
        onclick="closeMobileMenu()">О Нас</a>
     <a href="#about" class="text-2xl font-light text-white hover:text-neutral-300 transition-colors"
@@ -391,7 +396,8 @@
        onclick="closeMobileMenu()">Кейсы</a>
     <a href="#contact" class="text-2xl font-light text-white hover:text-neutral-300 transition-colors"
        onclick="closeMobileMenu()">Контакты</a>
-    <a href="https://t.me/davsetakie" target="_blank" rel="noopener" class="text-2xl font-light text-white hover:text-neutral-300 transition-colors"
+    <a href="https://t.me/davsetakie" target="_blank" rel="noopener"
+       class="text-2xl font-light text-white hover:text-neutral-300 transition-colors"
        onclick="closeMobileMenu()">Обсудить проект</a>
     <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white">
         <iconify-icon icon="solar:close-circle-linear" width="28" height="28" style="stroke-width: 1.5;"></iconify-icon>
@@ -401,7 +407,8 @@
 <!-- Hero Section -->
 <section id="home" class="relative h-screen w-full overflow-hidden">
     <!-- Video Background -->
-    <video id="heroVideo" class="absolute inset-0 w-full h-full video-bg" autoplay="" loop="" muted="" playsinline="" preload="metadata"
+    <video id="heroVideo" class="absolute inset-0 w-full h-full video-bg" autoplay="" loop="" muted="" playsinline=""
+           preload="metadata"
            poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1920&amp;q=80">
         <source id="heroVideoSource"
                 src="{{ url_for('static', path='files/ph.mp4') }}"
@@ -420,7 +427,6 @@
               style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
         <div class="w-px h-16 bg-gradient-to-b from-neutral-500 to-transparent"></div>
     </div>
-
 
 
     <!-- Hero Content -->
@@ -578,80 +584,81 @@
                 </div>
             </div>
         </div>
-    <!-- Listing 03 -->
-    <div class="card-item group">
-        <div class="card-inner">
-            <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
-                <div>
-                    <div class="font-display text-4xl text-white/10 mb-6">03</div>
-                    <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">
-                        Интернет-магазины</h3>
-                    <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Разрабатываем eCommerce-решения под ключ — от каталога и оплаты
+        <!-- Listing 03 -->
+        <div class="card-item group">
+            <div class="card-inner">
+                <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                    <div>
+                        <div class="font-display text-4xl text-white/10 mb-6">03</div>
+                        <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">
+                            Интернет-магазины</h3>
+                        <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Разрабатываем eCommerce-решения под ключ — от каталога и оплаты
                             до автоматизации заказов и масштабирования продаж.</span>
-                </div>
+                    </div>
 
-                <div class="max-w-xs">
-                    <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
-                        <li>Разработка интернет-магазинов под ключ</li>
-                        <li>Каталог с фильтрацией и интеллектуальным поиском</li>
-                        <li>Интеграция платёжных систем и онлайн-касс</li>
-                        <li>Подключение складских и учётных систем</li>
-                        <li>Автоматизация обработки заказов</li>
-                        <li>Личный кабинет покупателя</li>
-                        <li>Интеграция с маркетплейсами</li>
-                        <li>Аналитика и отчётность по продажам</li>
-                        <li>AI-рекомендации товаров и персонализация витрины</li>
-                    </ul>
+                    <div class="max-w-xs">
+                        <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
+                            <li>Разработка интернет-магазинов под ключ</li>
+                            <li>Каталог с фильтрацией и интеллектуальным поиском</li>
+                            <li>Интеграция платёжных систем и онлайн-касс</li>
+                            <li>Подключение складских и учётных систем</li>
+                            <li>Автоматизация обработки заказов</li>
+                            <li>Личный кабинет покупателя</li>
+                            <li>Интеграция с маркетплейсами</li>
+                            <li>Аналитика и отчётность по продажам</li>
+                            <li>AI-рекомендации товаров и персонализация витрины</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="relative h-full overflow-hidden order-first md:order-last">
-                <img src="{{ url_for('static', path='files/mob/mag.png') }}"
-                     class="lg:hidden w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                     alt="Creative Office mobile">
-                <img src="{{ url_for('static', path='files/shop.png') }}"
-                     class="hidden lg:block w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                     alt="Creative Office">
-                <div class="absolute inset-0 bg-black/10"></div>
+                <div class="relative h-full overflow-hidden order-first md:order-last">
+                    <img src="{{ url_for('static', path='files/mob/mag.png') }}"
+                         class="lg:hidden w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+                         alt="Creative Office mobile">
+                    <img src="{{ url_for('static', path='files/shop.png') }}"
+                         class="hidden lg:block w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+                         alt="Creative Office">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Listing 04 -->
-    <div class="card-item group">
-        <div class="card-inner">
-            <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
-                <div>
-                    <div class="font-display text-4xl text-white/10 mb-6">04</div>
-                    <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Разработка ПО</h3>
-                    <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Создаём кастомные IT-решения и SaaS-платформы для автоматизации,
+        <!-- Listing 04 -->
+        <div class="card-item group">
+            <div class="card-inner">
+                <div class="p-8 md:p-16 flex flex-col justify-between relative z-10 bg-[#0A0A0A]">
+                    <div>
+                        <div class="font-display text-4xl text-white/10 mb-6">04</div>
+                        <h3 class="font-display text-2xl md:text-4xl tracking-tighter mb-2 text-white">Разработка
+                            ПО</h3>
+                        <span class="text-xs font-medium uppercase tracking-[0.15em] text-white/50">Создаём кастомные IT-решения и SaaS-платформы для автоматизации,
                             масштабирования и цифровой трансформации бизнеса.</span>
-                </div>
+                    </div>
 
-                <div class="max-w-xs">
-    <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
-        <li>Разработка SaaS-платформ</li>
-        <li>Внутренние корпоративные системы</li>
-        <li>CRM и ERP-решения</li>
-        <li>Личные кабинеты и панели управления</li>
-        <li>Автоматизация внутренних процессов</li>
-        <li>API и системные интеграции</li>
-        <li>Высоконагруженные архитектуры</li>
-        <li>Поддержка и масштабирование</li>
-        <li>Интеграция AI-моделей и интеллектуальной аналитики</li>
-    </ul>
-</div>
-            </div>
-            <div class="relative h-full overflow-hidden order-first md:order-last">
-                <img src="{{ url_for('static', path='files/mob/po.png') }}"
-                     class="lg:hidden w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                     alt="Etihad Towers mobile">
-                <img src="{{ url_for('static', path='files/soft.png') }}"
-                     class="hidden lg:block w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 grayscale hover:grayscale-0"
-                     alt="Etihad Towers">
-                <div class="absolute inset-0 bg-black/10"></div>
+                    <div class="max-w-xs">
+                        <ul class="text-sm font-light text-gray-400 leading-relaxed mb-8 space-y-2">
+                            <li>Разработка SaaS-платформ</li>
+                            <li>Внутренние корпоративные системы</li>
+                            <li>CRM и ERP-решения</li>
+                            <li>Личные кабинеты и панели управления</li>
+                            <li>Автоматизация внутренних процессов</li>
+                            <li>API и системные интеграции</li>
+                            <li>Высоконагруженные архитектуры</li>
+                            <li>Поддержка и масштабирование</li>
+                            <li>Интеграция AI-моделей и интеллектуальной аналитики</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative h-full overflow-hidden order-first md:order-last">
+                    <img src="{{ url_for('static', path='files/mob/po.png') }}"
+                         class="lg:hidden w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+                         alt="Etihad Towers mobile">
+                    <img src="{{ url_for('static', path='files/soft.png') }}"
+                         class="hidden lg:block w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 grayscale hover:grayscale-0"
+                         alt="Etihad Towers">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
             </div>
         </div>
-    </div>
 
     </div>
 </section>
@@ -666,46 +673,46 @@
         <div class="border border-neutral-800 bg-neutral-900/35 p-6 lg:p-8">
             <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 <div class="pt-2 lg:pt-4">
-                <p class="text-sm lg:text-base text-neutral-300 leading-relaxed">
-                    Black Phantom — современная IT-компания, специализирующаяся на разработке цифровых решений для
-                    бизнеса любого масштаба. Мы создаём надёжные, масштабируемые и эффективные продукты, которые
-                    помогают нашим клиентам расти и уверенно чувствовать себя в цифровой среде.
-                </p>
+                    <p class="text-sm lg:text-base text-neutral-300 leading-relaxed">
+                        Black Phantom — современная IT-компания, специализирующаяся на разработке цифровых решений для
+                        бизнеса любого масштаба. Мы создаём надёжные, масштабируемые и эффективные продукты, которые
+                        помогают нашим клиентам расти и уверенно чувствовать себя в цифровой среде.
+                    </p>
 
-                <h3 class="text-white text-xl font-medium mt-8 mb-4 tracking-tight">Наша миссия</h3>
-                <p class="text-sm lg:text-base text-neutral-400 leading-relaxed">
-                    Мы стремимся делать технологии доступными и полезными, помогая компаниям автоматизировать
-                    процессы, оптимизировать затраты и выходить на новые рынки.
-                </p>
+                    <h3 class="text-white text-xl font-medium mt-8 mb-4 tracking-tight">Наша миссия</h3>
+                    <p class="text-sm lg:text-base text-neutral-400 leading-relaxed">
+                        Мы стремимся делать технологии доступными и полезными, помогая компаниям автоматизировать
+                        процессы, оптимизировать затраты и выходить на новые рынки.
+                    </p>
 
-                <h3 class="text-white text-xl font-medium mt-8 mb-4 tracking-tight">Наши ценности</h3>
-                <ul class="text-sm lg:text-base text-neutral-400 leading-relaxed space-y-2 list-disc list-inside">
-                    <li>Профессионализм и ответственность</li>
-                    <li>Прозрачность и честность в работе</li>
-                    <li>Постоянное развитие и внедрение инноваций</li>
-                    <li>Долгосрочные партнёрские отношения</li>
-                </ul>
+                    <h3 class="text-white text-xl font-medium mt-8 mb-4 tracking-tight">Наши ценности</h3>
+                    <ul class="text-sm lg:text-base text-neutral-400 leading-relaxed space-y-2 list-disc list-inside">
+                        <li>Профессионализм и ответственность</li>
+                        <li>Прозрачность и честность в работе</li>
+                        <li>Постоянное развитие и внедрение инноваций</li>
+                        <li>Долгосрочные партнёрские отношения</li>
+                    </ul>
 
-                <h3 class="text-white text-xl font-medium mt-8 mb-4 tracking-tight">Социальная ответственность</h3>
-                <p class="text-sm lg:text-base text-neutral-400 leading-relaxed">
-                    Мы уверены, что успешный бизнес — это не только технологии и прибыль, но и вклад в развитие
-                    общества. Black Phantom принимает активное участие в развитии спорта в городе, поддерживает
-                    спортивные мероприятия, молодёжные турниры и инициативы, направленные на популяризацию
-                    здорового образа жизни.
-                </p>
-                <p class="text-sm lg:text-base text-neutral-400 leading-relaxed mt-4">
-                    Кроме того, компания активно участвует в социальной жизни города: поддерживает образовательные
-                    проекты, участвует в благотворительных программах и городских мероприятиях. За вклад в
-                    развитие спорта и социальную деятельность компания награждена почётной грамотой.
-                </p>
+                    <h3 class="text-white text-xl font-medium mt-8 mb-4 tracking-tight">Социальная ответственность</h3>
+                    <p class="text-sm lg:text-base text-neutral-400 leading-relaxed">
+                        Мы уверены, что успешный бизнес — это не только технологии и прибыль, но и вклад в развитие
+                        общества. Black Phantom принимает активное участие в развитии спорта в городе, поддерживает
+                        спортивные мероприятия, молодёжные турниры и инициативы, направленные на популяризацию
+                        здорового образа жизни.
+                    </p>
+                    <p class="text-sm lg:text-base text-neutral-400 leading-relaxed mt-4">
+                        Кроме того, компания активно участвует в социальной жизни города: поддерживает образовательные
+                        проекты, участвует в благотворительных программах и городских мероприятиях. За вклад в
+                        развитие спорта и социальную деятельность компания награждена почётной грамотой.
+                    </p>
                 </div>
 
                 <aside class="lg:sticky lg:top-24">
                     <div class="relative overflow-hidden bg-neutral-900/40 p-3 lg:p-4">
-                    <img src="{{ url_for('static', path='files/gram.jpg') }}"
-                         alt="Почётная грамота компании Black Phantom"
-                         class="w-full h-auto object-cover"
-                         loading="lazy">
+                        <img src="{{ url_for('static', path='files/gram.jpg') }}"
+                             alt="Почётная грамота компании Black Phantom"
+                             class="w-full h-auto object-cover"
+                             loading="lazy">
                     </div>
                 </aside>
             </div>
@@ -850,6 +857,64 @@
                     <span class="text-xs text-neutral-600 font-light">04</span>
                 </div>
             </article>
+
+            <!-- Project 5 -->
+            <article class="project-card group" data-category="commercial">
+                <div class="relative aspect-video overflow-hidden bg-neutral-900">
+                    <img src="{{ url_for('static', path='files/zz.png') }}"
+                         alt="Project 4"
+                         class="project-image w-full h-full object-cover transition-transform duration-700"
+                         loading="lazy">
+                    <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-white tracking-tight group-hover:text-neutral-300 transition-colors">
+                            Платформа доставки еды с интеграцией iiko, собственной CRM и удобной админ-панелью для
+                            полного управления сайтом и заказами</h3>
+                        <p class="text-xs text-neutral-500 mt-1">Разработали платформу доставки еды с интеграцией iiko,
+                            обеспечивающую полный цикл обработки заказов и управления бизнесом. Система автоматически
+                            передаёт заказы с сайта в терминал, синхронизирует статусы и исключает ручной ввод.
+                            Встроенная CRM аккумулирует данные по клиентам, заказам и истории взаимодействий, позволяя
+                            сегментировать аудиторию и выстраивать повторные продажи. Админ-панель даёт полный контроль
+                            над сайтом: редактирование меню, цен, акций, зон доставки и контента без участия
+                            разработчиков. Решение поддерживает централизованное управление заказами, уведомления,
+                            аналитику и контроль качества обслуживания в едином интерфейсе.</p>
+                    </div>
+                    <span class="text-xs text-neutral-600 font-light">05</span>
+                </div>
+            </article>
+            <!-- Project 6 -->
+            <article class="project-card group" data-category="commercial">
+                <div class="relative aspect-video overflow-hidden bg-neutral-900">
+                    <img src="{{ url_for('static', path='files/ai.png') }}"
+                         alt="Project 4"
+                         class="project-image w-full h-full object-cover transition-transform duration-700"
+                         loading="lazy">
+                    <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
+                                      style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-start justify-between">
+                    <div>
+                        <h3 class="text-lg font-medium text-white tracking-tight group-hover:text-neutral-300 transition-colors">
+                            Бот для автоматизации клиентского сервиса и продаж</h3>
+                        <p class="text-xs text-neutral-500 mt-1">Разработали Telegram-бота для салона техники Apple,
+                            который автоматизирует взаимодействие с клиентами и упрощает процесс выбора и покупки
+                            устройств. Пользователи могут быстро ознакомиться с ассортиментом, узнать характеристики
+                            товаров, цены и наличие моделей.
+                            В боте реализована удобная навигация по категориям, возможность оставить заявку на покупку
+                            или получить консультацию менеджера, ускоряеющая обработку клиентских запросов.
+                            Также внедрена система уведомлений о новых поступлениях, акциях и скидках, а рассылки
+                            позволяют возвращать бывших клиентов и повышать вероятность повторных продаж.</p>
+                    </div>
+                    <span class="text-xs text-neutral-600 font-light">06</span>
+                </div>
+            </article>
         </div>
     </div>
 </section>
@@ -877,7 +942,8 @@
     <div class="max-w-screen-2xl mx-auto">
         <div class="text-center mb-16 lg:mb-20">
             <p class="text-xs text-neutral-600 tracking-widest mb-3">КОМПЕТЕНЦИИ</p>
-            <h2 class="font-display text-4xl lg:text-5xl font-normal text-white tracking-tight">Комплексные IT-решения</h2>
+            <h2 class="font-display text-4xl lg:text-5xl font-normal text-white tracking-tight">Комплексные
+                IT-решения</h2>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -886,7 +952,8 @@
             <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
 
                 <h3 class="text-lg font-medium text-white tracking-tight mb-3">Надёжная защита данных</h3>
-                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Реализуем современные стандарты безопасности, защиту
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Реализуем современные стандарты
+                    безопасности, защиту
                     персональных данных и устойчивость к кибератакам.</p>
             </div>
 
@@ -894,7 +961,8 @@
             <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
 
                 <h3 class="text-lg font-medium text-white tracking-tight mb-3">AI-интеграции для бизнеса</h3>
-                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Внедряем искусственный интеллект в веб-сервисы: чат-боты,
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Внедряем искусственный интеллект в
+                    веб-сервисы: чат-боты,
                     автоматизация процессов, персонализация контента и интеллектуальная аналитика.</p>
             </div>
 
@@ -902,15 +970,18 @@
             <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
 
                 <h3 class="text-lg font-medium text-white tracking-tight mb-3">Интеграция с любыми сервисами</h3>
-                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Подключаем CRM, платёжные системы, маркетинговые
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Подключаем CRM, платёжные системы,
+                    маркетинговые
                     инструменты и сторонние сервисы для создания единой цифровой экосистемы бизнеса.</p>
             </div>
 
             <!-- Service 4 -->
             <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
 
-                <h3 class="text-lg font-medium text-white tracking-tight mb-3">Гарантийное сопровождение после релиза</h3>
-                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">В течение 30 дней после запуска обеспечиваем техническую
+                <h3 class="text-lg font-medium text-white tracking-tight mb-3">Гарантийное сопровождение после
+                    релиза</h3>
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">В течение 30 дней после запуска
+                    обеспечиваем техническую
                     поддержку, мониторинг и корректную работу всех функций системы..</p>
             </div>
 
@@ -918,15 +989,18 @@
             <div class="group p-8 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/50 transition-all duration-300">
 
                 <h3 class="text-lg font-medium text-white tracking-tight mb-3">Высокая скорость загрузки</h3>
-                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Оптимизируем код, архитектуру и серверную часть, чтобы сайт
+                <p class="text-sm text-neutral-500 font-light leading-relaxed mb-4">Оптимизируем код, архитектуру и
+                    серверную часть, чтобы сайт
                     работал быстро и стабильно даже при высокой нагрузке.</p>
             </div>
 
             <!-- Service 6 - CTA -->
             <div class="group p-8 bg-white hover:bg-neutral-100 transition-all duration-300 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-lg font-medium text-neutral-950 tracking-tight mb-3">Готовы вывести бизнес на новый уровень?</h3>
-                    <p class="text-sm text-neutral-600 font-light leading-relaxed">Доверьте разработку профессионалам и получите цифровой продукт, который работает на ваш бизнес.</p>
+                    <h3 class="text-lg font-medium text-neutral-950 tracking-tight mb-3">Готовы вывести бизнес на новый
+                        уровень?</h3>
+                    <p class="text-sm text-neutral-600 font-light leading-relaxed">Доверьте разработку профессионалам и
+                        получите цифровой продукт, который работает на ваш бизнес.</p>
                 </div>
                 <a href="#contact" class="inline-flex items-center gap-2 text-sm font-medium text-neutral-950 mt-6">
                     Оставить
@@ -948,13 +1022,13 @@
             <!-- Left -->
             <div>
                 <p class="text-xs text-neutral-600 tracking-widest mb-3">КОНТАКТЫ</p>
-                <h2 class="font-display text-4xl lg:text-5xl font-normal text-white tracking-tight mb-8">Давайте создадим сильный цифровой продукт.</h2>
+                <h2 class="font-display text-4xl lg:text-5xl font-normal text-white tracking-tight mb-8">Давайте
+                    создадим сильный цифровой продукт.</h2>
 
                 <p class="text-neutral-400 font-light leading-relaxed mb-10">
                     Мы открыты к стратегическим проектам и долгосрочному сотрудничеству.
-Свяжитесь с нами, чтобы получить персональное предложение.
+                    Свяжитесь с нами, чтобы получить персональное предложение.
                 </p>
-
 
 
                 <!-- Social -->
@@ -983,7 +1057,8 @@
                     <input type="hidden" name="form_token" value="{{ form_token }}">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="first_name" class="block text-xs text-neutral-600 tracking-wider mb-2">ИМЯ</label>
+                            <label for="first_name"
+                                   class="block text-xs text-neutral-600 tracking-wider mb-2">ИМЯ</label>
                             <input type="text" id="first_name" name="first_name" required=""
                                    class="w-full bg-transparent border-b border-neutral-700 focus:border-white py-3 text-white outline-none transition-colors placeholder:text-neutral-600"
                                    maxlength="60"
@@ -1006,7 +1081,8 @@
                                placeholder="+7 (999) 999-99-99">
                     </div>
                     <div>
-                        <label for="message" class="block text-xs text-neutral-600 tracking-wider mb-2">ТЕКСТ СООБЩЕНИЯ</label>
+                        <label for="message" class="block text-xs text-neutral-600 tracking-wider mb-2">ТЕКСТ
+                            СООБЩЕНИЯ</label>
                         <textarea id="message" name="message" rows="4" required=""
                                   class="w-full bg-transparent border-b border-neutral-700 focus:border-white py-3 text-white outline-none transition-colors placeholder:text-neutral-600 resize-none"
                                   maxlength="4000"
@@ -1014,7 +1090,8 @@
                     </div>
                     <label class="flex items-start gap-3 text-sm text-neutral-400 leading-relaxed">
                         <input type="checkbox" name="consent" required="" class="mt-1 accent-white">
-                        <span>Я даю согласие на обработку <a href="/privacy" class="underline decoration-neutral-500 hover:decoration-white text-neutral-300 hover:text-white transition-colors">персональных данных</a>.</span>
+                        <span>Я даю согласие на обработку <a href="/privacy"
+                                                             class="underline decoration-neutral-500 hover:decoration-white text-neutral-300 hover:text-white transition-colors">персональных данных</a>.</span>
                     </label>
                     <button type="submit"
                             id="leadSubmitBtn"
@@ -1182,10 +1259,10 @@
     });
 
     // Selected Works stack animation
-        if (window.gsap && window.ScrollTrigger && window.matchMedia('(min-width: 1025px)').matches) {
-            gsap.registerPlugin(ScrollTrigger);
-            const cards = gsap.utils.toArray('.card-item');
-            cards.forEach((card, i) => {
+    if (window.gsap && window.ScrollTrigger && window.matchMedia('(min-width: 1025px)').matches) {
+        gsap.registerPlugin(ScrollTrigger);
+        const cards = gsap.utils.toArray('.card-item');
+        cards.forEach((card, i) => {
             const nextCard = cards[i + 1];
             if (nextCard) {
                 gsap.to(card.querySelector('.card-inner'), {
@@ -1198,98 +1275,98 @@
                         scrub: true
                     }
                 });
-                }
-            });
-        } else {
-            document.querySelectorAll('.card-inner').forEach((el) => {
-                el.style.filter = 'none';
-            });
-        }
+            }
+        });
+    } else {
+        document.querySelectorAll('.card-inner').forEach((el) => {
+            el.style.filter = 'none';
+        });
+    }
 
-        // Lead form submit
-        const leadForm = document.getElementById('leadForm');
-        const leadSubmitBtn = document.getElementById('leadSubmitBtn');
-        const leadStatus = document.getElementById('leadStatus');
+    // Lead form submit
+    const leadForm = document.getElementById('leadForm');
+    const leadSubmitBtn = document.getElementById('leadSubmitBtn');
+    const leadStatus = document.getElementById('leadStatus');
 
-        if (leadForm && leadSubmitBtn && leadStatus) {
-            const errorMessages = {
-                required_fields: 'Заполните все обязательные поля.',
-                consent_required: 'Подтвердите согласие на обработку персональных данных.',
-                invalid_form_token: 'Сессия формы истекла. Обновите страницу и отправьте снова.',
-                invalid_first_name: 'Проверьте корректность имени.',
-                invalid_email: 'Проверьте корректность email.',
-                invalid_phone: 'Проверьте корректность телефона.',
-                message_too_long: 'Сообщение слишком длинное.',
-                payload_too_large: 'Слишком большой объем данных в форме.',
+    if (leadForm && leadSubmitBtn && leadStatus) {
+        const errorMessages = {
+            required_fields: 'Заполните все обязательные поля.',
+            consent_required: 'Подтвердите согласие на обработку персональных данных.',
+            invalid_form_token: 'Сессия формы истекла. Обновите страницу и отправьте снова.',
+            invalid_first_name: 'Проверьте корректность имени.',
+            invalid_email: 'Проверьте корректность email.',
+            invalid_phone: 'Проверьте корректность телефона.',
+            message_too_long: 'Сообщение слишком длинное.',
+            payload_too_large: 'Слишком большой объем данных в форме.',
+        };
+
+        leadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            leadStatus.classList.add('hidden');
+
+            const formData = new FormData(leadForm);
+            const payload = {
+                first_name: (formData.get('first_name') || '').toString().trim(),
+                email: (formData.get('email') || '').toString().trim(),
+                phone: (formData.get('phone') || '').toString().trim(),
+                message: (formData.get('message') || '').toString().trim(),
+                consent: formData.get('consent') === 'on',
+                form_token: (formData.get('form_token') || '').toString(),
             };
 
-            leadForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                leadStatus.classList.add('hidden');
+            leadSubmitBtn.disabled = true;
+            const oldText = leadSubmitBtn.textContent;
+            leadSubmitBtn.textContent = 'ОТПРАВКА...';
 
-                const formData = new FormData(leadForm);
-                const payload = {
-                    first_name: (formData.get('first_name') || '').toString().trim(),
-                    email: (formData.get('email') || '').toString().trim(),
-                    phone: (formData.get('phone') || '').toString().trim(),
-                    message: (formData.get('message') || '').toString().trim(),
-                    consent: formData.get('consent') === 'on',
-                    form_token: (formData.get('form_token') || '').toString(),
-                };
-
-                leadSubmitBtn.disabled = true;
-                const oldText = leadSubmitBtn.textContent;
-                leadSubmitBtn.textContent = 'ОТПРАВКА...';
-
-                try {
-                    const resp = await fetch('/api/lead', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                    });
-                    const data = await resp.json().catch(() => ({}));
-                    if (!resp.ok || !data.ok) {
-                        throw new Error(data.error || 'request_failed');
-                    }
-                    leadForm.reset();
-                    leadStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
-                    leadStatus.className = 'text-sm text-green-400';
-                } catch (err) {
-                    leadStatus.textContent = errorMessages[err.message] || 'Не удалось отправить заявку. Попробуйте еще раз.';
-                    leadStatus.className = 'text-sm text-red-400';
-                } finally {
-                    leadSubmitBtn.disabled = false;
-                    leadSubmitBtn.textContent = oldText;
-                    leadStatus.classList.remove('hidden');
+            try {
+                const resp = await fetch('/api/lead', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload),
+                });
+                const data = await resp.json().catch(() => ({}));
+                if (!resp.ok || !data.ok) {
+                    throw new Error(data.error || 'request_failed');
                 }
-            });
-        }
+                leadForm.reset();
+                leadStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+                leadStatus.className = 'text-sm text-green-400';
+            } catch (err) {
+                leadStatus.textContent = errorMessages[err.message] || 'Не удалось отправить заявку. Попробуйте еще раз.';
+                leadStatus.className = 'text-sm text-red-400';
+            } finally {
+                leadSubmitBtn.disabled = false;
+                leadSubmitBtn.textContent = oldText;
+                leadStatus.classList.remove('hidden');
+            }
+        });
+    }
 
-        // BlurText-like animation (by words, direction top, delay 200ms)
-        const identityBlurText = document.getElementById('identityBlurText');
-        if (identityBlurText) {
-            const text = identityBlurText.textContent.trim();
-            const words = text.split(/\s+/);
-            identityBlurText.textContent = '';
-            const baseDelay = 200;
-            const step = 120;
+    // BlurText-like animation (by words, direction top, delay 200ms)
+    const identityBlurText = document.getElementById('identityBlurText');
+    if (identityBlurText) {
+        const text = identityBlurText.textContent.trim();
+        const words = text.split(/\s+/);
+        identityBlurText.textContent = '';
+        const baseDelay = 200;
+        const step = 120;
 
-            words.forEach((word, i) => {
-                const span = document.createElement('span');
-                span.className = 'blur-word';
-                span.style.animationDelay = `${baseDelay + i * step}ms`;
-                span.textContent = word;
-                identityBlurText.appendChild(span);
-                if (i < words.length - 1) {
-                    identityBlurText.appendChild(document.createTextNode(' '));
-                } else {
-                    span.addEventListener('animationend', () => {
-                        console.log('Animation completed!');
-                    }, { once: true });
-                }
-            });
-        }
-    </script>
+        words.forEach((word, i) => {
+            const span = document.createElement('span');
+            span.className = 'blur-word';
+            span.style.animationDelay = `${baseDelay + i * step}ms`;
+            span.textContent = word;
+            identityBlurText.appendChild(span);
+            if (i < words.length - 1) {
+                identityBlurText.appendChild(document.createTextNode(' '));
+            } else {
+                span.addEventListener('animationend', () => {
+                    console.log('Animation completed!');
+                }, {once: true});
+            }
+        });
+    }
+</script>
 
 
 </body>
