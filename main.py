@@ -2,6 +2,7 @@
 import hmac
 import json
 import logging
+import mimetypes
 import os
 import re
 import socket
@@ -14,13 +15,16 @@ from pathlib import Path
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 load_dotenv()
+mimetypes.add_type('image/webp', '.webp')
 
 app = FastAPI()
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 app.mount('/static', StaticFiles(directory='static'), name='static')
 templates = Jinja2Templates(directory='templates')
 logger = logging.getLogger('uvicorn.error')

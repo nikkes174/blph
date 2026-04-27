@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Политика конфиденциальности</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -56,8 +56,8 @@
 <body class="bg-neutral-950 text-neutral-100 antialiased is-loading">
     <div id="pagePreloader" class="preloader">
         <div class="flex flex-col items-center gap-4">
-            <img src="{{ url_for('static', path='files/logo.png') }}" alt="BLACK PHANTOM"
-                 class="w-20 h-20 object-contain preloader-logo">
+            <img src="{{ url_for('static', path='files/optimized/logo-96.webp') }}" alt="BLACK PHANTOM"
+                 class="w-20 h-20 object-contain preloader-logo" width="80" height="80" decoding="async">
             <span class="text-sm tracking-[0.25em] text-white/80">BLACK PHANTOM</span>
         </div>
     </div>
@@ -176,10 +176,7 @@
                 document.body.classList.add('is-loading');
             }
         };
-        withPreloaderTimeout(Promise.all([
-            waitForDomReady(),
-            document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => undefined) : Promise.resolve(),
-        ])).then(() => window.setTimeout(hidePreloader, 120));
+        withPreloaderTimeout(waitForDomReady(), 600).then(() => window.setTimeout(hidePreloader, 120));
         window.addEventListener('beforeunload', showPreloader);
         document.querySelectorAll('a[href]').forEach((link) => {
             link.addEventListener('click', () => {

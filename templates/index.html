@@ -9,11 +9,9 @@
           content="Инженерные решения для современного бизнеса: веб-платформы, AI и автоматизация процессов.">
     <meta property="og:type" content="website">
     <title>BLACK PHANTOM</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', path='files/ph.mp4') }}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="icon" type="image/webp" href="{{ url_for('static', path='files/optimized/logo-96.webp') }}">
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@400;500&amp;display=swap"
@@ -344,8 +342,8 @@
 
 <div id="pagePreloader" class="preloader">
     <div class="flex flex-col items-center gap-4">
-        <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo"
-             class="w-20 h-20 object-contain preloader-logo">
+        <img src="{{ url_for('static', path='files/optimized/logo-96.webp') }}" alt="Black Phantom logo"
+             class="w-20 h-20 object-contain preloader-logo" width="80" height="80" decoding="async">
         <span class="text-sm tracking-[0.25em] text-white/80">BLACK PHANTOM</span>
     </div>
 </div>
@@ -355,8 +353,8 @@
     <div class="flex items-center justify-between max-w-screen-2xl mx-auto">
         <a href="#home"
            class="inline-flex items-center gap-2 text-sm font-medium tracking-tighter text-white hover:text-neutral-300 transition-colors">
-            <img src="{{ url_for('static', path='files/logo.png') }}" alt="Black Phantom logo"
-                 class="w-6 h-6 object-contain">
+            <img src="{{ url_for('static', path='files/optimized/logo-96.webp') }}" alt="Black Phantom logo"
+                 class="w-6 h-6 object-contain" width="24" height="24" decoding="async">
             <span>BLACK PHANTOM</span>
         </a>
 
@@ -419,7 +417,7 @@
     <!-- Video Background -->
     <video id="heroVideo" class="absolute inset-0 w-full h-full video-bg" autoplay="" loop="" muted="" playsinline=""
            preload="metadata"
-           poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1920&amp;q=80">
+           poster="{{ url_for('static', path='files/optimized/logo-96.webp') }}">
         <source id="heroVideoSource"
                 src="{{ url_for('static', path='files/ph.mp4') }}"
                 data-desktop-src="{{ url_for('static', path='files/ph.mp4') }}"
@@ -482,30 +480,6 @@
             <div class="line-reveal h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
         </div>
     </div>
-    <script type="text/javascript">!function () {
-        var u = window.UnicornStudio;
-        if (u && u.init) {
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", function () {
-                    u.init()
-                })
-            } else {
-                u.init()
-            }
-        } else {
-            window.UnicornStudio = {isInitialized: !1};
-            var i = document.createElement("script");
-            i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.3/dist/unicornStudio.umd.js", i.onload = function () {
-                if (document.readyState === "loading") {
-                    document.addEventListener("DOMContentLoaded", function () {
-                        UnicornStudio.init()
-                    })
-                } else {
-                    UnicornStudio.init()
-                }
-            }, (document.head || document.body).appendChild(i)
-        }
-    }();</script>
 </section>
 <!-- SELECTED WORKS (STACK) -->
 <section id="about" class="stack-section pt-24 md:pt-32 pb-10 md:pb-14">
@@ -548,12 +522,12 @@
                     </div>
                 </div>
                 <div class="relative h-full overflow-hidden order-first md:order-last">
-                    <img src="{{ url_for('static', path='files/mob/dev.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/mob-dev-720.webp') }}"
                          class="lg:hidden w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                         alt="Office Tower mobile">
-                    <img src="{{ url_for('static', path='files/dev1.png') }}"
+                         alt="Office Tower mobile" loading="lazy" decoding="async">
+                    <img src="{{ url_for('static', path='files/optimized/dev1-960.webp') }}"
                          class="hidden lg:block w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                         alt="Office Tower">
+                         alt="Office Tower" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-black/10"></div>
                 </div>
             </div>
@@ -587,9 +561,9 @@
                     </div>
                 </div>
                 <div class="relative h-full overflow-hidden order-first md:order-last">
-                    <img src="{{ url_for('static', path='files/bot.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/bot-960.webp') }}"
                          class="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                         alt="Luxury Interior">
+                         alt="Luxury Interior" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-black/10"></div>
                 </div>
             </div>
@@ -621,12 +595,12 @@
                     </div>
                 </div>
                 <div class="relative h-full overflow-hidden order-first md:order-last">
-                    <img src="{{ url_for('static', path='files/mob/mag.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/mob-mag-720.webp') }}"
                          class="lg:hidden w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                         alt="Creative Office mobile">
-                    <img src="{{ url_for('static', path='files/shop.png') }}"
+                         alt="Creative Office mobile" loading="lazy" decoding="async">
+                    <img src="{{ url_for('static', path='files/optimized/shop-960.webp') }}"
                          class="hidden lg:block w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                         alt="Creative Office">
+                         alt="Creative Office" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-black/10"></div>
                 </div>
             </div>
@@ -659,12 +633,12 @@
                     </div>
                 </div>
                 <div class="relative h-full overflow-hidden order-first md:order-last">
-                    <img src="{{ url_for('static', path='files/mob/po.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/mob-po-720.webp') }}"
                          class="lg:hidden w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
-                         alt="Etihad Towers mobile">
-                    <img src="{{ url_for('static', path='files/soft.png') }}"
+                         alt="Etihad Towers mobile" loading="lazy" decoding="async">
+                    <img src="{{ url_for('static', path='files/optimized/soft-960.webp') }}"
                          class="hidden lg:block w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 grayscale hover:grayscale-0"
-                         alt="Etihad Towers">
+                         alt="Etihad Towers" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-black/10"></div>
                 </div>
             </div>
@@ -719,10 +693,10 @@
 
                 <aside class="lg:sticky lg:top-24">
                     <div class="relative overflow-hidden bg-neutral-900/40 p-3 lg:p-4">
-                        <img src="{{ url_for('static', path='files/gram.jpg') }}"
+                        <img src="{{ url_for('static', path='files/optimized/gram-720.webp') }}"
                              alt="Почётная грамота компании Black Phantom"
                              class="w-full h-auto object-cover"
-                             loading="lazy">
+                             loading="lazy" decoding="async">
                     </div>
                 </aside>
             </div>
@@ -747,10 +721,10 @@
             <!-- Project 1 -->
             <article class="project-card group" data-category="commercial">
                 <div class="relative aspect-video overflow-hidden bg-neutral-900">
-                    <img src="{{ url_for('static', path='files/zz.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/zz-672.webp') }}"
                          alt="Project 4"
                          class="project-image w-full h-full object-cover transition-transform duration-700"
-                         loading="lazy">
+                         loading="lazy" decoding="async">
                     <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
                         <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
                                       style="stroke-width: 1.5;"></iconify-icon>
@@ -777,10 +751,10 @@
             <!-- Project 2 -->
             <article class="project-card group" data-category="music">
                 <div class="relative aspect-video overflow-hidden bg-neutral-900">
-                    <img src="{{ url_for('static', path='files/oil.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/oil-937.webp') }}"
                          alt="Project 2"
                          class="project-image w-full h-full object-cover transition-transform duration-700"
-                         loading="lazy">
+                         loading="lazy" decoding="async">
                     <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
                         <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
                                       style="stroke-width: 1.5;"></iconify-icon>
@@ -810,10 +784,10 @@
             <!-- Project 3 -->
             <article class="project-card group" data-category="documentary">
                 <div class="relative aspect-video overflow-hidden bg-neutral-900">
-                    <img src="{{ url_for('static', path='files/sushi.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/sushi-778.webp') }}"
                          alt="Project 3"
                          class="project-image w-full h-full object-cover transition-transform duration-700"
-                         loading="lazy">
+                         loading="lazy" decoding="async">
                     <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
                         <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
                                       style="stroke-width: 1.5;"></iconify-icon>
@@ -841,10 +815,10 @@
             <!-- Project 4 -->
             <article class="project-card group" data-category="commercial">
                 <div class="relative aspect-video overflow-hidden bg-neutral-900">
-                    <img src="{{ url_for('static', path='files/om.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/om-346.webp') }}"
                          alt="Project 4"
                          class="project-image w-full h-full object-cover transition-transform duration-700"
-                         loading="lazy">
+                         loading="lazy" decoding="async">
                     <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
                         <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
                                       style="stroke-width: 1.5;"></iconify-icon>
@@ -875,10 +849,10 @@
             <!-- Project 5 -->
             <article class="project-card group" data-category="commercial">
                 <div class="relative aspect-video overflow-hidden bg-neutral-900">
-                    <img src="{{ url_for('static', path='files/ai.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/ai-667.webp') }}"
                          alt="Project 4"
                          class="project-image w-full h-full object-cover transition-transform duration-700"
-                         loading="lazy">
+                         loading="lazy" decoding="async">
                     <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
                         <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
                                       style="stroke-width: 1.5;"></iconify-icon>
@@ -903,10 +877,10 @@
             <!-- Project 6 -->
                         <article class="project-card group" data-category="commercial">
                 <div class="relative aspect-video overflow-hidden bg-neutral-900">
-                    <img src="{{ url_for('static', path='files/iss.png') }}"
+                    <img src="{{ url_for('static', path='files/optimized/iss-594.webp') }}"
                          alt="Project 1"
                          class="project-image w-full h-full object-cover transition-transform duration-700"
-                         loading="lazy">
+                         loading="lazy" decoding="async">
                     <div class="project-overlay absolute inset-0 bg-neutral-950/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
                         <iconify-icon icon="solar:play-circle-linear" width="48" height="48" class="text-white"
                                       style="stroke-width: 1.5;"></iconify-icon>
@@ -1145,7 +1119,32 @@
             heroVideoSource.setAttribute('src', targetSrc);
             heroVideo.load();
         }
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const saveData = navigator.connection && navigator.connection.saveData;
+        if (prefersReducedMotion || saveData) {
+            heroVideo.removeAttribute('autoplay');
+            heroVideo.pause();
+        }
     }
+
+    const loadScriptOnce = (() => {
+        const pending = new Map();
+        return (src) => {
+            if (pending.has(src)) {
+                return pending.get(src);
+            }
+            const promise = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+            pending.set(src, promise);
+            return promise;
+        };
+    })();
 
     // Global preloader
     const pagePreloader = document.getElementById('pagePreloader');
@@ -1159,10 +1158,7 @@
         }
         return new Promise((resolve) => document.addEventListener('DOMContentLoaded', resolve, {once: true}));
     };
-    const waitForPageReady = () => withPreloaderTimeout(Promise.all([
-        waitForDomReady(),
-        document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => undefined) : Promise.resolve(),
-    ]));
+    const waitForPageReady = () => withPreloaderTimeout(waitForDomReady(), 600);
     const hidePreloader = () => {
         if (pagePreloader) {
             document.body.classList.remove('is-loading');
@@ -1230,13 +1226,17 @@
     const projectModal = document.getElementById('projectModal');
 
     function openProjectModal(id) {
-        projectModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (projectModal) {
+            projectModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     }
 
     function closeProjectModal() {
-        projectModal.classList.remove('active');
-        document.body.style.overflow = '';
+        if (projectModal) {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 
     // Filter Projects
@@ -1285,8 +1285,22 @@
     });
 
     // Selected Works stack animation
-    if (window.gsap && window.ScrollTrigger && window.matchMedia('(min-width: 1025px)').matches) {
-        gsap.registerPlugin(ScrollTrigger);
+    const initStackAnimation = async () => {
+        if (!window.matchMedia('(min-width: 1025px)').matches) {
+            document.querySelectorAll('.card-inner').forEach((el) => {
+                el.style.filter = 'none';
+            });
+            return;
+        }
+
+        await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js');
+        await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js');
+
+        if (!window.gsap || !window.ScrollTrigger) {
+            return;
+        }
+
+        window.gsap.registerPlugin(window.ScrollTrigger);
         const cards = gsap.utils.toArray('.card-item');
         cards.forEach((card, i) => {
             const nextCard = cards[i + 1];
@@ -1303,10 +1317,46 @@
                 });
             }
         });
+    };
+
+    const stackSection = document.getElementById('about');
+    if (stackSection && 'IntersectionObserver' in window) {
+        const stackObserver = new IntersectionObserver((entries, observer) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                observer.disconnect();
+                initStackAnimation().catch(() => undefined);
+            }
+        }, {rootMargin: '600px 0px'});
+        stackObserver.observe(stackSection);
     } else {
-        document.querySelectorAll('.card-inner').forEach((el) => {
-            el.style.filter = 'none';
-        });
+        initStackAnimation().catch(() => undefined);
+    }
+
+    const initUnicornStudio = async () => {
+        if (!document.querySelector('[data-us-project]')) {
+            return;
+        }
+        if (!window.UnicornStudio || !window.UnicornStudio.init) {
+            window.UnicornStudio = window.UnicornStudio || {isInitialized: false};
+            await loadScriptOnce('https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.3/dist/unicornStudio.umd.js');
+        }
+        if (window.UnicornStudio && window.UnicornStudio.init) {
+            window.UnicornStudio.init();
+        }
+    };
+
+    const unicornTarget = document.querySelector('[data-us-project]');
+    if (unicornTarget && 'IntersectionObserver' in window) {
+        const unicornObserver = new IntersectionObserver((entries, observer) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                observer.disconnect();
+                initUnicornStudio().catch(() => undefined);
+            }
+        }, {rootMargin: '500px 0px'});
+        unicornObserver.observe(unicornTarget);
+    } else if (unicornTarget) {
+        const runWhenIdle = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 700));
+        runWhenIdle(() => initUnicornStudio().catch(() => undefined));
     }
 
     // Lead form submit
