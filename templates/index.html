@@ -1,4 +1,4 @@
-﻿<html lang="fr">
+﻿<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <title>BLACK PHANTOM</title>
     <link rel="icon" type="image/webp" href="{{ url_for('static', path='files/optimized/logo-96.webp') }}">
-    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -225,6 +225,13 @@
             transition: opacity 0.35s ease, visibility 0.35s ease;
         }
 
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
         body.is-loading {
             overflow: hidden;
         }
@@ -242,9 +249,19 @@
         }
 
         .preloader-logo {
+            width: 5rem;
+            height: 5rem;
+            object-fit: contain;
             animation: preloaderPulse 1.8s ease-in-out infinite;
             filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
             will-change: transform, filter, opacity;
+        }
+
+        .preloader-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            letter-spacing: 0.25em;
         }
 
         @keyframes preloaderPulse {
@@ -341,10 +358,10 @@
 <body class="bg-neutral-950 text-neutral-100 antialiased is-loading">
 
 <div id="pagePreloader" class="preloader">
-    <div class="flex flex-col items-center gap-4">
+    <div class="preloader-content">
         <img src="{{ url_for('static', path='files/optimized/logo-96.webp') }}" alt="Black Phantom logo"
-             class="w-20 h-20 object-contain preloader-logo" width="80" height="80" decoding="async">
-        <span class="text-sm tracking-[0.25em] text-white/80">BLACK PHANTOM</span>
+             class="preloader-logo" width="80" height="80" decoding="async">
+        <span class="preloader-title">BLACK PHANTOM</span>
     </div>
 </div>
 
@@ -417,7 +434,7 @@
     <!-- Video Background -->
     <video id="heroVideo" class="absolute inset-0 w-full h-full video-bg" autoplay="" loop="" muted="" playsinline=""
            preload="metadata"
-           poster="{{ url_for('static', path='files/optimized/logo-96.webp') }}">
+           poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1920&amp;q=80">
         <source id="heroVideoSource"
                 src="{{ url_for('static', path='files/ph.mp4') }}"
                 data-desktop-src="{{ url_for('static', path='files/ph.mp4') }}"
@@ -1193,14 +1210,18 @@
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
 
-    menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
 
     function closeMobileMenu() {
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 
     // Showreel Modal
@@ -1217,8 +1238,12 @@
     }
 
     function closeVideoModal() {
-        videoModal.classList.remove('active');
-        videoIframe.src = '';
+        if (videoModal) {
+            videoModal.classList.remove('active');
+        }
+        if (videoIframe) {
+            videoIframe.src = '';
+        }
         document.body.style.overflow = '';
     }
 
