@@ -382,7 +382,7 @@
             <a href="#work" class="text-xs font-light text-neutral-400 hover:text-white transition-colors">Кейсы</a>
             <a href="#contact"
                class="text-xs font-light text-neutral-400 hover:text-white transition-colors">Контакты</a>
-            <a href="https://t.me/davsetakie" target="_blank" rel="noopener" class="cta-discuss">
+            <a href="https://t.me/BlackPhantom96" target="_blank" rel="noopener" class="cta-discuss">
                 <div class="cta-line-v" style="left:-2px;">
                     <div class="cta-blur"></div>
                 </div>
@@ -421,7 +421,7 @@
        onclick="closeMobileMenu()">Кейсы</a>
     <a href="#contact" class="text-2xl font-light text-white hover:text-neutral-300 transition-colors"
        onclick="closeMobileMenu()">Контакты</a>
-    <a href="https://t.me/davsetakie" target="_blank" rel="noopener"
+    <a href="https://t.me/BlackPhantom96" target="_blank" rel="noopener"
        class="text-2xl font-light text-white hover:text-neutral-300 transition-colors"
        onclick="closeMobileMenu()">Обсудить проект</a>
     <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-white">
@@ -710,10 +710,29 @@
 
                 <aside class="lg:sticky lg:top-24">
                     <div class="relative overflow-hidden bg-neutral-900/40 p-3 lg:p-4">
-                        <img src="{{ url_for('static', path='files/optimized/gram-720.webp') }}"
-                             alt="Почётная грамота компании Black Phantom"
-                             class="w-full h-auto object-cover"
-                             loading="lazy" decoding="async">
+                        <div id="aboutCarousel" class="relative aspect-[720/891] overflow-hidden">
+                            <div id="aboutCarouselTrack" class="flex h-full transition-transform duration-500 ease-out">
+                                <img src="{{ url_for('static', path='files/optimized/gram-720.webp') }}"
+                                     alt="Почётная грамота компании Black Phantom"
+                                     class="h-full w-full shrink-0 object-cover"
+                                     loading="lazy" decoding="async">
+                                <img src="{{ url_for('static', path='files/gram_2.jpg') }}"
+                                     alt="Почётная грамота компании Black Phantom"
+                                     class="h-full w-full shrink-0 object-cover"
+                                     loading="lazy" decoding="async">
+                            </div>
+
+                            <button type="button" data-about-carousel="previous"
+                                    class="absolute left-3 top-1/2 -translate-y-1/2 border border-white/30 bg-neutral-950/70 p-2 text-white transition-colors hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-white/80"
+                                    aria-label="Предыдущее изображение">
+                                <iconify-icon icon="solar:alt-arrow-left-linear" width="20" height="20"></iconify-icon>
+                            </button>
+                            <button type="button" data-about-carousel="next"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 border border-white/30 bg-neutral-950/70 p-2 text-white transition-colors hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-white/80"
+                                    aria-label="Следующее изображение">
+                                <iconify-icon icon="solar:alt-arrow-right-linear" width="20" height="20"></iconify-icon>
+                            </button>
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -1035,7 +1054,7 @@
 
                 <!-- Social -->
                 <div class="flex gap-4">
-                    <a href="https://t.me/davsetakie" target="_blank" rel="noopener"
+                    <a href="https://t.me/BlackPhantom96" target="_blank" rel="noopener"
                        class="w-10 h-10 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800 flex items-center justify-center transition-all">
                         <iconify-icon icon="fa6-brands:telegram" width="18" height="18" class="text-neutral-400"
                                       style="stroke-width: 1.5;"></iconify-icon>
@@ -1262,6 +1281,25 @@
             projectModal.classList.remove('active');
             document.body.style.overflow = '';
         }
+    }
+
+    // About section carousel
+    const aboutCarousel = document.getElementById('aboutCarousel');
+    const aboutCarouselTrack = document.getElementById('aboutCarouselTrack');
+    if (aboutCarousel && aboutCarouselTrack) {
+        const slides = aboutCarouselTrack.querySelectorAll('img');
+        let activeSlide = 0;
+
+        const showAboutSlide = (index) => {
+            activeSlide = (index + slides.length) % slides.length;
+            aboutCarouselTrack.style.transform = `translateX(-${activeSlide * 100}%)`;
+        };
+
+        aboutCarousel.querySelectorAll('[data-about-carousel]').forEach((button) => {
+            button.addEventListener('click', () => {
+                showAboutSlide(activeSlide + (button.dataset.aboutCarousel === 'next' ? 1 : -1));
+            });
+        });
     }
 
     // Filter Projects
